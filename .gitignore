@@ -1,0 +1,10 @@
+venv/
+.env
+__pycache__/
+*.pyc
+*.png
+!qr_code.png
+!logo.png
+!assets/*.png
+!presentation/*.png
+studsmena.db

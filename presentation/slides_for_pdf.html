@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>SKO Shift — Презентация AI Battle 2026</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    @page {
+      size: 16in 9in;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #F8FAFC;
+      color: #0F172A;
+      margin: 0;
+      padding: 0;
+    }
+
+    .slide {
+      width: 16in;
+      height: 9in;
+      page-break-after: always;
+      position: relative;
+      background: #F8FAFC;
+      padding: 0.85in 1.1in;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: hidden;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: radial-gradient(#CBD5E1 0.75px, transparent 0.75px);
+      background-size: 24px 24px;
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.35in;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background-color: #EFF6FF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 9999px;
+    }
+
+    .tag-number {
+      font-size: 14px;
+      font-weight: 700;
+      color: #94A3B8;
+      letter-spacing: 0.05em;
+    }
+
+    .slide-title {
+      font-size: 38px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .slide-subtitle {
+      font-size: 18px;
+      color: #475569;
+      font-weight: 400;
+      line-height: 1.4;
+      margin-bottom: 0.3in;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.4in;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.35in;
+      flex: 1;
+    }
+
+    .card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 18px;
+      padding: 0.32in;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: #2563EB;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+    }
+
+    .card.green::before { background: #059669; }
+    .card.amber::before { background: #D97706; }
+    .card.red::before { background: #E11D48; }
+    .card.purple::before { background: #7C3AED; }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0F172A;
+      margin-bottom: 12px;
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #EFF6FF;
+      color: #2563EB;
+    }
+
+    .icon-box.green { background: #ECFDF5; color: #059669; }
+    .icon-box.amber { background: #FFFBEB; color: #D97706; }
+    .icon-box.red { background: #FEF2F2; color: #E11D48; }
+    .icon-box.purple { background: #F5F3FF; color: #7C3AED; }
+
+    .icon-box svg {
+      width: 20px;
+      height: 20px;
+      stroke-width: 2;
+    }
+
+    .metric-row {
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid #F1F5F9;
+    }
+
+    .metric-value {
+      font-size: 36px;
+      font-weight: 800;
+      color: #2563EB;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .card.green .metric-value { color: #059669; }
+    .card.amber .metric-value { color: #D97706; }
+    .card.purple .metric-value { color: #7C3AED; }
+
+    .metric-label {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748B;
+      margin-top: 4px;
+    }
+
+    .list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .list li {
+      font-size: 16px;
+      color: #334155;
+      line-height: 1.55;
+      position: relative;
+      padding-left: 22px;
+    }
+
+    .list li::before {
+      content: "•";
+      position: absolute;
+      left: 2px;
+      top: -1px;
+      color: #2563EB;
+      font-weight: bold;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .card.green .list li::before { color: #059669; }
+    .card.amber .list li::before { color: #D97706; }
+    .card.red .list li::before { color: #E11D48; }
+    .card.purple .list li::before { color: #7C3AED; }
+
+    .hero-container {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 28px;
+      padding: 0.8in 0.9in;
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .hero-container::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #2563EB, #059669);
+      border-top-left-radius: 28px;
+      border-top-right-radius: 28px;
+    }
+
+    .hero-title {
+      font-size: 64px;
+      font-weight: 800;
+      color: #0F172A;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-top: 15px;
+      margin-bottom: 20px;
+    }
+
+    .hero-desc {
+      font-size: 26px;
+      color: #059669;
+      font-weight: 600;
+      line-height: 1.35;
+      max-width: 90%;
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 26px;
+      border-top: 1px solid #E2E8F0;
+      color: #64748B;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .final-box {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 28px;
+      padding: 0.45in 0.65in;
+      text-align: center;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.06);
+    }
+
+    .final-box::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, #2563EB, #059669);
+      border-top-left-radius: 28px;
+      border-top-right-radius: 28px;
+    }
+
+    .final-showcase {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 48px;
+      background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 100%);
+      border: 1px solid #DBEAFE;
+      border-radius: 24px;
+      padding: 24px 44px;
+      width: 100%;
+      max-width: 13.5in;
+      box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.07);
+    }
+
+    .qr-card-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .qr-card-img {
+      max-height: 2.7in;
+      width: auto;
+      border-radius: 18px;
+      box-shadow: 0 14px 30px -6px rgba(37, 99, 235, 0.22), 0 0 0 1px rgba(226, 232, 240, 0.8);
+      background: #FFFFFF;
+    }
+
+    .qr-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #FFFFFF;
+      border: 1px solid #BFDBFE;
+      color: #1D4ED8;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 5px 14px;
+      border-radius: 9999px;
+      box-shadow: 0 2px 6px rgba(37, 99, 235, 0.08);
+    }
+
+    .showcase-info {
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      flex: 1;
+      max-width: 580px;
+    }
+
+    .tg-handle-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+      color: #FFFFFF;
+      font-size: 18px;
+      font-weight: 800;
+      padding: 8px 20px;
+      border-radius: 12px;
+      width: fit-content;
+      letter-spacing: 0.02em;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
+    }
+
+    .showcase-features {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      padding: 9px 14px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+    }
+
+    .feature-icon-circle {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .feature-icon-circle.blue { background: #EFF6FF; color: #2563EB; }
+    .feature-icon-circle.green { background: #ECFDF5; color: #059669; }
+    .feature-icon-circle.purple { background: #FAF5FF; color: #7C3AED; }
+
+    .live-status-bar {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #059669;
+      font-weight: 700;
+    }
+
+    .pulse-dot {
+      width: 9px;
+      height: 9px;
+      background: #10B981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+    }
+
+    .team-strip {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+    }
+
+    .team-strip-card {
+      background: #F8FAFC;
+      border: 1px solid #E2E8F0;
+      border-radius: 14px;
+      padding: 9px 18px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-align: left;
+    }
+
+    .team-avatar-initials {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 13px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+    }
+
+    .team-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #2563EB;
+      background: #EFF6FF;
+      padding: 4px 10px;
+      border-radius: 6px;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ==================== СЛАЙД 1: ТИТУЛЬНЫЙ ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="hero-container">
+        <div style="display: flex; align-items: center; gap: 28px; margin-bottom: 20px;">
+          <img src="logo.png" alt="SKO Shift Logo" style="width: 88px; height: 88px; object-fit: contain; border-radius: 20px; background: white; padding: 6px; box-shadow: 0 12px 28px -6px rgba(37,99,235,0.25); border: 1px solid rgba(226,232,240,0.9);">
+          <div>
+            <div class="tag-pill" style="margin-bottom: 8px;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              AI BATTLE: SMART REGION EDITION • СЕВЕРО-КАЗАХСТАНСКАЯ ОБЛАСТЬ
+            </div>
+            <h1 class="hero-title" style="margin: 0; line-height: 1;">SKO Shift</h1>
+          </div>
+        </div>
+        <p class="hero-desc">AI-платформа экспресс-подработки для учащихся колледжей и вузов региона на 3–4 часа без срыва учебы</p>
+        <div class="hero-meta">
+          <span>Спикер: <b>Иван Шмаков</b> | Капитан: <b>Кирилл Субботин</b> | Разработка: <b>Шамиль Хомидов</b></span>
+          <span>Организаторы: Astana Hub (SKO Hub), УЦТ СКО, СКУ им. М. Козыбаева</span>
+          <span>Петропавловск, 2026</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 2: ЦЕЛЕВАЯ АУДИТОРИЯ ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Целевая аудитория</div>
+        <div class="tag-number">02 / 10</div>
+      </div>
+      <h2 class="slide-title">Клиент и ЦА: Все колледжи и вуз СКО</h2>
+      <p class="slide-subtitle">Охват студенческой молодежи всего региона (колледжи ТиПО и СКУ) и малого бизнеса города</p>
+      
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>
+            </div>
+            Сегмент 1: Учащиеся колледжей и СКУ
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">18 000+</div>
+            <div class="metric-label">Студентов колледжей и университета в СКО</div>
+          </div>
+          <ul class="list">
+            <li><b>Колледжи Петропавловска:</b> ВСППК, Колледж им. М. Жумабаева, ПСЭК, Медколледж, ПКМиТ (вкл. ж/д профиль), ГТК и др.</li>
+            <li><b>Вуз:</b> СКУ им. М. Козыбаева (корпуса на Интернациональной и Пушкина).</li>
+            <li>Свободны ежедневно после 15:30 – 17:00 после учебных занятий и практики.</li>
+            <li>Потребность: быстрый честный заработок 4 000 – 7 000 ₸ на карманные расходы.</li>
+            <li>Критично: подбор смен строго рядом с конкретным учебным корпусом или общежитием.</li>
+          </ul>
+        </div>
+
+        <div class="card amber">
+          <div class="card-header">
+            <div class="icon-box amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect><line x1="9" y1="22" x2="9" y2="22.01"></line><line x1="15" y1="22" x2="15" y2="22.01"></line><line x1="9" y1="6" x2="9" y2="6.01"></line><line x1="15" y1="6" x2="15" y2="6.01"></line><line x1="9" y1="10" x2="9" y2="10.01"></line><line x1="15" y1="10" x2="15" y2="10.01"></line><line x1="9" y1="14" x2="9" y2="14.01"></line><line x1="15" y1="14" x2="15" y2="14.01"></line><line x1="9" y1="18" x2="9" y2="18.01"></line><line x1="15" y1="18" x2="15" y2="18.01"></line></svg>
+            </div>
+            Сегмент 2: Малый и средний бизнес города
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">450+</div>
+            <div class="metric-label">Точек торговли, общепита, логистики и складов</div>
+          </div>
+          <ul class="list">
+            <li>ТРЦ Dostyk Mall, ТРЦ City Mall (бутики одежды, обуви, магазины).</li>
+            <li>Общепит на ул. Конституции и Жамбыла (кофейни, фастфуд, пекарни).</li>
+            <li>Склады на Гашека и базы: срочная разгрузка при приезде фуры с товаром.</li>
+            <li>Проблема: острая нехватка рук на вечерний пик покупателей (3–4 часа).</li>
+            <li>Невыгодно и долго оформлять постоянного сотрудника в штат на разовую помощь.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 3: ПРОБЛЕМА ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Проблема региона</div>
+        <div class="tag-number">03 / 10</div>
+      </div>
+      <h2 class="slide-title">Проблема: барьеры студенческой занятости в СКО</h2>
+      <p class="slide-subtitle">Классический найм не подходит учащимся и создает регулярные финансовые потери бизнесу</p>
+      
+      <div class="grid-3">
+        <div class="card red">
+          <div class="card-header">
+            <div class="icon-box red">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>
+            </div>
+            Учащиеся колледжей / вуза
+          </div>
+          <ul class="list">
+            <li>График 5/2 несовместим с учебой и практикой в колледжах.</li>
+            <li>Риск невыплаты: работодатели часто не отдают деньги за разовый труд.</li>
+            <li>Транспорт через весь город съедает 50% заработка.</li>
+            <li>Резюме и собеседования ради 3 часов работы не имеют смысла.</li>
+          </ul>
+        </div>
+
+        <div class="card amber">
+          <div class="card-header">
+            <div class="icon-box amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            Бизнес Петропавловска
+          </div>
+          <ul class="list">
+            <li>Штатный сотрудник заболел или фура пришла в 17:00 без предупреждения.</li>
+            <li>Очереди в зале и простой разгрузки = прямые убытки за вечер.</li>
+            <li>Поиск на OLX и HH занимает 2–5 дней (слишком долго).</li>
+            <li>Люди из случайных групп VK и Telegram ненадежны и не приходят.</li>
+          </ul>
+        </div>
+
+        <div class="card purple">
+          <div class="card-header">
+            <div class="icon-box purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline><polyline points="17 18 23 18 23 12"></polyline></svg>
+            </div>
+            Масштаб проблемы в СКО
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">> 24 часов</div>
+            <div class="metric-label">Средний срок закрытия разовой вакансии</div>
+          </div>
+          <ul class="list">
+            <li>До 25 000 ₸ упущенной выручки бутика за один вечер простоя.</li>
+            <li>Тысячи студентов региона остаются без источников карманных средств.</li>
+            <li>Полное отсутствие юридической защиты разовой микро-сделки.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 4: РЕШЕНИЕ И ПРОДУКТ ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Решение и Продукт</div>
+        <div class="tag-number">04 / 10</div>
+      </div>
+      <h2 class="slide-title">Решение: AI-платформа «SKO Shift»</h2>
+      <p class="slide-subtitle">Единый Telegram-агрегатор для всех колледжей и СКУ на базе Google Gemini AI</p>
+      
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="10" rx="2"></rect><circle cx="12" cy="5" r="2"></circle><path d="M12 7v4"></path><line x1="8" y1="16" x2="8" y2="16.01"></line><line x1="16" y1="16" x2="16.01"></line></svg>
+            </div>
+            1. Ввод в одну строку
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">0.7 сек</div>
+            <div class="metric-label">Время обработки текста ИИ</div>
+          </div>
+          <ul class="list">
+            <li>Работодатель пишет текст или аудио в Telegram в свободной форме.</li>
+            <li>LLM (Gemini) извлекает: задачу, оплату, часы и гео-точку города.</li>
+            <li>Никаких регистраций и тяжелых анкет.</li>
+          </ul>
+        </div>
+
+        <div class="card green">
+          <div class="card-header">
+            <div class="icon-box green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            </div>
+            2. Выбор колледжа и гео
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">10–15 мин</div>
+            <div class="metric-label">Пешая доступность от учебы</div>
+          </div>
+          <ul class="list">
+            <li>Студент выбирает свой колледж (ВСППК, ПКМиТ, Жумабаева, ПСЭК и др.).</li>
+            <li>Жмет кнопку «Свободен сегодня (17:00 – 21:00)».</li>
+            <li>ИИ рассчитывает маршрут и шлет пуш студентам поблизости.</li>
+          </ul>
+        </div>
+
+        <div class="card purple">
+          <div class="card-header">
+            <div class="icon-box purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            </div>
+            3. Kaspi & Расписка
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">< 60 сек</div>
+            <div class="metric-label">Полный цикл закрытия смены</div>
+          </div>
+          <ul class="list">
+            <li>Автогенерация цифрового соглашения со смарт-условиями.</li>
+            <li>Гарантированная выплата день-в-день сразу на Kaspi Gold.</li>
+            <li>Двусторонний рейтинг надежности исполнителя и заказчика.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 5: РЫНОК ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Объем Рынка</div>
+        <div class="tag-number">05 / 10</div>
+      </div>
+      <h2 class="slide-title">Объем рынка по формуле в тенге в год</h2>
+      <p class="slide-subtitle">Прозрачная логика расчета по методике инкубатора: чек × клиенты × год</p>
+      
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            </div>
+            Рынок Северо-Казахстанской области (SOM)
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">8 400 000 ₸ / год</div>
+            <div class="metric-label">Выручка платформы только в СКО (Вуз + Колледжи)</div>
+          </div>
+          <ul class="list">
+            <li><b>База:</b> 18 000+ студентов 25+ колледжей и университета СКУ.</li>
+            <li><b>Спрос:</b> 450+ точек ритейла, ТРЦ Dostyk Mall, складов и общепита.</li>
+            <li><b>Консервативный объем:</b> 70 закрытых смен в день по региону.</li>
+            <li><b>Формула:</b> 400 ₸ (комиссия) × 70 смен/день × 300 дней = <b>8 400 000 ₸/год</b>.</li>
+            <li><b>Студенческий оборот:</b> свыше 105 000 000 ₸ прямых выплат студентам СКО.</li>
+          </ul>
+        </div>
+
+        <div class="card green">
+          <div class="card-header">
+            <div class="icon-box green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"></path><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"></path></svg>
+            </div>
+            Масштабирование на Северный Казахстан (SAM)
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">30 000 000 ₸ / год</div>
+            <div class="metric-label">Потенциал 4 регионов (СКО, Акмола, Костанай, Павлодар)</div>
+          </div>
+          <ul class="list">
+            <li><b>Целевые города:</b> Петропавловск, Кокшетау, Костанай, Павлодар.</li>
+            <li><b>Совокупный объем колледжей и вузов:</b> 250 закрытых смен в день.</li>
+            <li><b>Расчет:</b> 400 ₸ × 250 смен × 300 дней = <b>30 000 000 ₸/год</b>.</li>
+            <li><b>Рынок Казахстана (TAM):</b> более 150 000 000 ₸/год в системе ТиПО и вузов.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 6: КОНКУРЕНТЫ ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Конкурентный анализ</div>
+        <div class="tag-number">06 / 10</div>
+      </div>
+      <h2 class="slide-title">Конкурентные Преимущества</h2>
+      <p class="slide-subtitle">Почему бизнес и учащиеся всех колледжей СКО выбирают «СтудСмену»</p>
+      
+      <div class="grid-3">
+        <div class="card" style="opacity: 0.85;">
+          <div class="card-header">
+            <div class="icon-box" style="background: #F1F5F9; color: #64748B;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            HeadHunter & OLX
+          </div>
+          <ul class="list">
+            <li>Тяжелые резюме и долгие согласования.</li>
+            <li>Срок подбора: от 3 до 7 дней.</li>
+            <li>Фокус только на полный день (5/2).</li>
+            <li>Нет микро-смен на 3–4 часа вечера.</li>
+            <li>Платное и дорогое размещение вакансий.</li>
+          </ul>
+        </div>
+
+        <div class="card amber" style="opacity: 0.85;">
+          <div class="card-header">
+            <div class="icon-box amber">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+            </div>
+            Городские чаты и VK
+          </div>
+          <ul class="list">
+            <li>Неструктурированный поток сообщений и спама.</li>
+            <li>Нет фильтрации по колледжам и районам.</li>
+            <li>Высокий риск невыплаты денег учащимся.</li>
+            <li>50% исполнителей не доходят до объекта.</li>
+            <li>Отсутствие юридической защиты сделки.</li>
+          </ul>
+        </div>
+
+        <div class="card green">
+          <div class="card-header">
+            <div class="icon-box green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path></svg>
+            </div>
+            «SKO Shift»
+          </div>
+          <ul class="list">
+            <li><b>Мэтчинг < 60 секунд</b> без резюме.</li>
+            <li><b>Выбор колледжа:</b> пешая доступность от учебы.</li>
+            <li><b>AI-ввод:</b> работодатель пишет 1 строчку текста.</li>
+            <li><b>Kaspi-выплата:</b> гарантировано день-в-день.</li>
+            <li><b>Цифровая расписка:</b> безопасность сделки.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 7: ЧТО УЖЕ СДЕЛАНО (MVP) ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Результаты и Traction</div>
+        <div class="tag-number">07 / 10</div>
+      </div>
+      <h2 class="slide-title">Что УЖЕ сделано в проекте (Результаты MVP)</h2>
+      <p class="slide-subtitle">Мы пришли на батл не просто с презентацией, а с 100% действующим техническим продуктом</p>
+      
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            Технический MVP (@SKO_Shift_bot)
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">Active & Live</div>
+            <div class="metric-label">Бот опрашивает Telegram API в реальном времени</div>
+          </div>
+          <ul class="list">
+            <li>Развернут работающий Telegram-бот <b>@SKO_Shift_bot</b> на aiogram 3.</li>
+            <li>Интегрирована модель Google Gemini AI для структурирования заявок в JSON.</li>
+            <li>Встроен каталог колледжей (СКУ, Жумабаева, ВСППК, ПСЭК, ПКМиТ и др.).</li>
+            <li>Настроен авто-расчет пешего времени от каждого учебного корпуса.</li>
+            <li>Встроен отказоустойчивый оффлайн-контур для бесперебойного живого демо.</li>
+          </ul>
+        </div>
+
+        <div class="card green">
+          <div class="card-header">
+            <div class="icon-box green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+            </div>
+            Архитектура и Готовность к Запуску
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">Ready to Launch</div>
+            <div class="metric-label">Полная готовность к проведению пилота в СКО</div>
+          </div>
+          <ul class="list">
+            <li>Спроектирован прозрачный сквозной процесс: заявка в 1 строку → ИИ-парсинг → пуш студенту → мэтч.</li>
+            <li>Разработана структура юридически понятного цифрового соглашения о микро-подработке.</li>
+            <li>Интерфейс адаптирован под моментальные выплаты день-в-день через Kaspi.</li>
+            <li>Бот готов к реальному тестированию прямо в зале хакатона на смартфонах жюри и участников.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 8: ПЛАН РАЗВИТИЯ ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Дорожная карта</div>
+        <div class="tag-number">08 / 10</div>
+      </div>
+      <h2 class="slide-title">Реалистичный План Развития на 2026 год</h2>
+      <p class="slide-subtitle">Поэтапный запуск: от пилота в центральных колледжах до масштабирования по городу</p>
+      
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-header">
+            <div class="icon-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            </div>
+            Октябрь 2026
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">30 смен</div>
+            <div class="metric-label">Цель локального пилота</div>
+          </div>
+          <ul class="list">
+            <li>Локальный старт в СКУ и 2 ближайших колледжах (им. Жумабаева и ВСППК).</li>
+            <li>Привлечение первых 50–70 активных студентов.</li>
+            <li>5–7 партнерских точек в ТРЦ Dostyk Mall (бутики, кофейни).</li>
+          </ul>
+        </div>
+
+        <div class="card green">
+          <div class="card-header">
+            <div class="icon-box green">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+            </div>
+            Ноябрь 2026
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">15 смен / день</div>
+            <div class="metric-label">Расширение базы колледжей</div>
+          </div>
+          <ul class="list">
+            <li>Подключение ПСЭК и ПКМиТ.</li>
+            <li>Выход на стабильные 10–15 закрытых смен в день.</li>
+            <li>Тестирование механизма безопасной выплаты через Kaspi QR.</li>
+          </ul>
+        </div>
+
+        <div class="card purple">
+          <div class="card-header">
+            <div class="icon-box purple">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            </div>
+            Декабрь 2026+
+          </div>
+          <div class="metric-row">
+            <div class="metric-value">25 смен / день</div>
+            <div class="metric-label">Закрепление в Петропавловске</div>
+          </div>
+          <ul class="list">
+            <li>Закрепление в городе (20–25 смен в день, ~300 000 ₸ выручки в месяц).</li>
+            <li>Оптимизация AI-парсера по реальным отзывам работодателей.</li>
+            <li>Разработка отдельного веб-лендинга платформы.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 9: КОМАНДА ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="header-bar">
+        <div class="tag-pill">Команда проекта</div>
+        <div class="tag-number">09 / 10</div>
+      </div>
+      <h2 class="slide-title">Команда Проекта</h2>
+      <p class="slide-subtitle">Четкое распределение обязанностей: лидерство, разработка и публичная защита</p>
+      
+      <div class="grid-3">
+        <!-- Кирилл -->
+        <div class="card">
+          <div class="team-badge">Капитан команды</div>
+          <div class="card-header" style="font-size: 22px; margin-bottom: 6px; display: flex; align-items: center; gap: 10px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="2.2"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 2v3m0 14v3M2 12h3m14 0h3m-3.05-6.95l-2.12 2.12m-9.66 9.66l-2.12 2.12m0-13.9l2.12 2.12m9.66 9.66l2.12 2.12"/><circle cx="12" cy="12" r="7"/></svg>
+            Кирилл Субботин
+          </div>
+          <p style="font-size: 13px; color: #64748B; margin-bottom: 16px; font-weight: 600;">Координация, идеи и тестирование</p>
+          <ul class="list">
+            <li>Генерация и валидация продуктовых гипотез.</li>
+            <li>Сквозное тестирование пользовательских сценариев бота.</li>
+            <li>Контроль сроков и координация команды на батле.</li>
+            <li>Взаимодействие со студенческой аудиторией.</li>
+          </ul>
+        </div>
+
+        <!-- Иван -->
+        <div class="card green">
+          <div class="team-badge" style="background: #ECFDF5; color: #059669;">Спикер проекта</div>
+          <div class="card-header" style="font-size: 22px; margin-bottom: 6px; display: flex; align-items: center; gap: 10px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11a7 7 0 01-14 0m14 0a7 7 0 00-14 0m7 7v4m-4 0h8m-4-11a3 3 0 003-3V5a3 3 0 10-6 0v5a3 3 0 003 3z"/></svg>
+            Иван Шмаков
+          </div>
+          <p style="font-size: 13px; color: #64748B; margin-bottom: 16px; font-weight: 600;">Презентация, питч и защита</p>
+          <ul class="list">
+            <li>Подготовка структуры выступления и тайминга (180 сек).</li>
+            <li>Публичная защита проекта перед жюри и экспертами.</li>
+            <li>Ответы на вопросы и аргументация бизнес-модели.</li>
+            <li>Демонстрация работы продукта на сцене.</li>
+          </ul>
+        </div>
+
+        <!-- Шамиль -->
+        <div class="card purple">
+          <div class="team-badge" style="background: #F5F3FF; color: #7C3AED;">AI & Backend Lead</div>
+          <div class="card-header" style="font-size: 22px; margin-bottom: 6px; display: flex; align-items: center; gap: 10px;">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.2"><rect x="4" y="4" width="16" height="16" rx="3"/><rect x="9" y="9" width="6" height="6" rx="1"/><path stroke-linecap="round" stroke-linejoin="round" d="M9 1v3m6-3v3m-6 16v3m6-3v3M1 9h3m-3 6h3m16-6h3m-3 6h3"/></svg>
+            Шамиль Хомидов
+          </div>
+          <p style="font-size: 13px; color: #64748B; margin-bottom: 16px; font-weight: 600;">Полная техническая реализация</p>
+          <ul class="list">
+            <li>Архитектура и разработка Telegram-бота на Python/aiogram 3.</li>
+            <li>Интеграция Google Gemini AI для структурирования заявок.</li>
+            <li>База данных SQLite и алгоритмы гео-маршрутизации по СКО.</li>
+            <li>Полное техническое обеспечение живого демо на питче.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== СЛАЙД 10: ФИНАЛ ==================== -->
+  <div class="slide">
+    <div class="slide-content">
+      <div class="final-box">
+        <!-- Top header -->
+        <div style="display: flex; align-items: center; justify-content: center; gap: 20px; margin-bottom: 6px;">
+          <img src="logo.png" alt="SKO Shift Logo" style="width: 72px; height: 72px; object-fit: contain; border-radius: 16px; background: white; padding: 5px; box-shadow: 0 10px 25px -5px rgba(37,99,235,0.25); border: 1px solid rgba(226,232,240,0.9);">
+          <div style="text-align: left;">
+            <div class="tag-pill" style="margin-bottom: 4px;">ФИНАЛ • AI BATTLE 2026 • СКУ им. М. КОЗЫБАЕВА</div>
+            <h1 style="font-size: 40px; font-weight: 800; color: #0F172A; margin: 0; letter-spacing: -0.02em;">SKO Shift</h1>
+          </div>
+        </div>
+        <p style="font-size: 18px; color: #059669; font-weight: 600; margin: 0 0 12px 0;">«Быстрые деньги учащимся колледжей и вузов — надежные руки бизнесу города»</p>
+
+        <!-- Central Showcase -->
+        <div class="final-showcase">
+          <div class="qr-card-wrap">
+            <img src="qr_code.png" class="qr-card-img" alt="Telegram Bot QR">
+            <div class="qr-badge">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              Сканируйте камерой смартфона
+            </div>
+          </div>
+
+          <div class="showcase-info">
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+              <div class="tg-handle-pill">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                @SKO_SHIFT_BOT
+              </div>
+              <div class="live-status-bar">
+                <span class="pulse-dot"></span> Бот активен онлайн
+              </div>
+            </div>
+
+            <div class="showcase-features">
+              <div class="feature-item">
+                <div class="feature-icon-circle blue">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+                </div>
+                <div>
+                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">Заявка работодателя в 1 строку</div>
+                  <div style="font-size: 13px; color: #64748B;">AI извлекает оплату, время и адрес без заполнения тяжелых анкет</div>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon-circle green">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">25+ колледжей и корпусов СКУ</div>
+                  <div style="font-size: 13px; color: #64748B;">Авторасчет пешей доступности (10–15 мин) от места учебы или общежития</div>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon-circle purple">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <div>
+                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">Команда /demo для жюри</div>
+                  <div style="font-size: 13px; color: #64748B;">Запуск полной симуляции мэтчинга и цифровой расписки за 15 секунд</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Team Strip -->
+        <div style="width: 100%;">
+          <div class="team-strip">
+            <div class="team-strip-card">
+              <div class="team-avatar-initials" style="background: #2563EB;">КС</div>
+              <div>
+                <div style="font-size: 15px; font-weight: 800; color: #0F172A;">Кирилл Субботин</div>
+                <div style="font-size: 12px; color: #2563EB; font-weight: 600;">Капитан • Идеи, тесты и координация</div>
+              </div>
+            </div>
+
+            <div class="team-strip-card">
+              <div class="team-avatar-initials" style="background: #059669;">ИШ</div>
+              <div>
+                <div style="font-size: 15px; font-weight: 800; color: #0F172A;">Иван Шмаков</div>
+                <div style="font-size: 12px; color: #059669; font-weight: 600;">Спикер • Презентация, питч и защита</div>
+              </div>
+            </div>
+
+            <div class="team-strip-card">
+              <div class="team-avatar-initials" style="background: #7C3AED;">ШХ</div>
+              <div>
+                <div style="font-size: 15px; font-weight: 800; color: #0F172A;">Шамиль Хомидов</div>
+                <div style="font-size: 12px; color: #7C3AED; font-weight: 600;">AI & Backend Lead • Код, AI и база данных</div>
+              </div>
+            </div>
+          </div>
+          <p style="color: #64748B; font-size: 14px; margin-top: 10px; font-weight: 500;">
+            Спасибо за внимание! Готовы ответить на любые вопросы жюри и экспертов.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
