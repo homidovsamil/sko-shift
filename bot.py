@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 import database as db
 import ai_parser
 import keyboards as kb
+from aiohttp import web
 
 load_dotenv()
 
@@ -357,6 +358,22 @@ async def switch_role(message: types.Message):
 
 # ==================== MAIN RUNNER ====================
 
+async def start_healthcheck_server():
+    port = int(os.environ.get("PORT", 8080))
+    app = web.Application()
+    async def ping(request):
+        return web.Response(text="OK - SKO Shift Bot is running 24/7!")
+    app.router.add_get("/", ping)
+    app.router.add_get("/health", ping)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    try:
+        site = web.TCPSite(runner, "0.0.0.0", port)
+        await site.start()
+        logger.info(f"Healthcheck web server started on port {port}")
+    except Exception as e:
+        logger.info(f"Healthcheck port {port} skipped: {e}")
+
 async def main():
     db.init_db()
     if not bot:
@@ -367,6 +384,7 @@ async def main():
     print("🚀 БОТ «СтудСмена СКО» (Вузы + Все Колледжи) УСПЕШНО ЗАПУЩЕН!")
     print("="*60)
     
+    await start_healthcheck_server()
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
