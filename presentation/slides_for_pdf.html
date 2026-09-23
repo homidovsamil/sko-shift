@@ -1007,24 +1007,42 @@
         </div>
         <p style="font-size: 18px; color: #059669; font-weight: 600; margin: 0 0 12px 0;">«Быстрые деньги учащимся колледжей и вузов — надежные руки бизнесу города»</p>
 
-        <!-- Central Showcase -->
+        <!-- Central Showcase: Dual QR (Bot + Website) -->
         <div class="final-showcase">
-          <div class="qr-card-wrap">
-            <img src="qr_code.png" class="qr-card-img" alt="Telegram Bot QR">
-            <div class="qr-badge">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-              Сканируйте камерой смартфона
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <!-- QR 1: Telegram Bot -->
+            <div class="qr-card-wrap">
+              <img src="qr_code.png" class="qr-card-img" alt="Telegram Bot QR" style="max-height: 2.25in; background: #FFFFFF;">
+              <div class="qr-badge" style="background: #EFF6FF; border-color: #BFDBFE; color: #1D4ED8;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                Telegram-бот
+              </div>
+            </div>
+
+            <!-- QR 2: Website -->
+            <div class="qr-card-wrap">
+              <img src="qr_site.png" class="qr-card-img" alt="Website QR" style="max-height: 2.25in; background: #FFFFFF; padding: 8px;">
+              <div class="qr-badge" style="background: #ECFDF5; border-color: #A7F3D0; color: #047857;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                Веб-сайт проекта
+              </div>
             </div>
           </div>
 
           <div class="showcase-info">
-            <div style="display: flex; align-items: center; justify-content: space-between;">
-              <div class="tg-handle-pill">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                @SKO_SHIFT_BOT
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div class="tg-handle-pill" style="font-size: 15px; padding: 7px 16px;">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                  @SKO_SHIFT_BOT
+                </div>
+                <div class="tg-handle-pill" style="background: linear-gradient(135deg, #059669 0%, #047857 100%); font-size: 14px; padding: 7px 16px; box-shadow: 0 6px 16px rgba(5, 150, 105, 0.28);">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                  Live Web Simulator
+                </div>
               </div>
               <div class="live-status-bar">
-                <span class="pulse-dot"></span> Бот активен онлайн
+                <span class="pulse-dot"></span> Online 24/7
               </div>
             </div>
 
@@ -1044,8 +1062,8 @@
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
                 </div>
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">25+ колледжей и корпусов СКУ</div>
-                  <div style="font-size: 13px; color: #64748B;">Авторасчет пешей доступности (10–15 мин) от места учебы или общежития</div>
+                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">25+ колледжей и корпусов СКУ (2ГИС)</div>
+                  <div style="font-size: 13px; color: #64748B;">Авторасчет пешей доступности и маршрутов автобусов Петропавловска</div>
                 </div>
               </div>
 
@@ -1054,8 +1072,8 @@
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
                 </div>
                 <div>
-                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">Команда /demo для жюри</div>
-                  <div style="font-size: 13px; color: #64748B;">Запуск полной симуляции мэтчинга и цифровой расписки за 15 секунд</div>
+                  <div style="font-size: 15px; font-weight: 700; color: #0F172A;">Live Web-симулятор + Команда /demo в боте</div>
+                  <div style="font-size: 13px; color: #64748B;">Мгновенный тест работы ИИ и цифровой расписки прямо на защите</div>
                 </div>
               </div>
             </div>
