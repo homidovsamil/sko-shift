@@ -90,18 +90,23 @@ def get_user(telegram_id: int) -> Optional[Dict[str, Any]]:
     conn.close()
     return dict(row) if row else None
 
-def set_student_status(telegram_id: int, status: str, free_from: str = "17:00", free_to: str = "21:00"):
+def set_student_status(telegram_id: int, status: str, free_from: str = "17:00", free_to: str = "21:00", full_name: str = "", username: str = ""):
     conn = get_connection()
     cur = conn.cursor()
     cur.execute("""
-    UPDATE users 
-    SET status = ?, free_from = ?, free_to = ?
-    WHERE telegram_id = ?
-    """, (status, free_from, free_to, telegram_id))
+    INSERT INTO users (telegram_id, role, full_name, username, status, free_from, free_to)
+    VALUES (?, 'student', ?, ?, ?, ?, ?)
+    ON CONFLICT(telegram_id) DO UPDATE SET
+        status = excluded.status,
+        free_from = excluded.free_from,
+        free_to = excluded.free_to,
+        full_name = CASE WHEN excluded.full_name != '' THEN excluded.full_name ELSE users.full_name END,
+        username = CASE WHEN excluded.username != '' THEN excluded.username ELSE users.username END;
+    """, (telegram_id, full_name, username, status, free_from, free_to))
     conn.commit()
     conn.close()
 
-def set_student_institution(telegram_id: int, institution: str, campus: str):
+def set_student_institution(telegram_id: int, institution: str, campus: str, full_name: str = "", username: str = ""):
     conn = get_connection()
     cur = conn.cursor()
     # Ensure columns exist if table was created earlier
@@ -109,7 +114,15 @@ def set_student_institution(telegram_id: int, institution: str, campus: str):
         cur.execute("ALTER TABLE users ADD COLUMN institution TEXT DEFAULT 'СКУ им. М. Козыбаева'")
     except sqlite3.OperationalError:
         pass
-    cur.execute("UPDATE users SET institution = ?, campus = ? WHERE telegram_id = ?", (institution, campus, telegram_id))
+    cur.execute("""
+    INSERT INTO users (telegram_id, role, full_name, username, institution, campus)
+    VALUES (?, 'student', ?, ?, ?, ?)
+    ON CONFLICT(telegram_id) DO UPDATE SET
+        institution = excluded.institution,
+        campus = excluded.campus,
+        full_name = CASE WHEN excluded.full_name != '' THEN excluded.full_name ELSE users.full_name END,
+        username = CASE WHEN excluded.username != '' THEN excluded.username ELSE users.username END;
+    """, (telegram_id, full_name, username, institution, campus))
     conn.commit()
     conn.close()
 

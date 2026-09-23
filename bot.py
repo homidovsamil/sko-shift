@@ -32,6 +32,7 @@ class EmployerStates(StatesGroup):
 async def cmd_start(message: types.Message):
     db.init_db()
     user = message.from_user
+    db.upsert_user(user.id, "student", user.full_name, user.username)
     welcome_text = (
         f"👋 Салем, {user.first_name}!\n\n"
         "⚡ <b>«СтудСмена СКО»</b> — AI-сервис экспресс-подработки для студентов <b>всех колледжей и вузов Северо-Казахстанской области</b>.\n\n"
@@ -65,7 +66,13 @@ async def set_institution_callback(callback: types.CallbackQuery):
             campus = addr
             break
 
-    db.set_student_institution(callback.from_user.id, inst_name, campus)
+    db.set_student_institution(
+        callback.from_user.id,
+        inst_name,
+        campus,
+        full_name=callback.from_user.full_name,
+        username=callback.from_user.username
+    )
     
     await callback.message.edit_text(
         f"✅ Учебное заведение сохранено:\n<b>{inst_name}</b> ({campus})\n\n"
@@ -96,7 +103,8 @@ async def choose_employer(message: types.Message):
 
 @dp.message(F.text.contains("Свободен сегодня"))
 async def student_mark_free(message: types.Message):
-    db.set_student_status(message.from_user.id, "free")
+    user = message.from_user
+    db.set_student_status(user.id, "free", full_name=user.full_name, username=user.username)
     text = (
         "🟢 <b>Статус: Свободен для подработки на вечер (17:00 – 21:00)</b>\n\n"
         "📡 ИИ-радар включен. Как только бизнесу рядом с вашим колледжем понадобятся руки — вам придет мгновенное уведомление с кнопкой «Взять смену».\n\n"
@@ -106,15 +114,19 @@ async def student_mark_free(message: types.Message):
 
 @dp.message(F.text.contains("Занят на учебе"))
 async def student_mark_busy(message: types.Message):
-    db.set_student_status(message.from_user.id, "busy")
+    user = message.from_user
+    db.set_student_status(user.id, "busy", full_name=user.full_name, username=user.username)
     text = "🔴 <b>Статус: Занят на учебе.</b>\nУведомления о подработке приостановлены до следующей смены."
     await message.answer(text, parse_mode="HTML", reply_markup=kb.get_student_main_keyboard(is_free=False))
 
 @dp.message(F.text == "🔍 Найти смены рядом со мной")
 async def search_nearby_shifts(message: types.Message):
     user_data = db.get_user(message.from_user.id)
-    institution = user_data.get("institution", "СКУ им. М. Козыбаева") if user_data else "СКУ им. М. Козыбаева"
-    campus = user_data.get("campus", "ул. Интернациональная 26") if user_data else "ул. Интернациональная 26"
+    if not user_data:
+        db.upsert_user(message.from_user.id, "student", message.from_user.full_name, message.from_user.username)
+        user_data = db.get_user(message.from_user.id)
+    institution = (user_data.get("institution") if user_data and user_data.get("institution") else "СКУ им. М. Козыбаева")
+    campus = (user_data.get("campus") if user_data and user_data.get("campus") else "ул. Интернациональная 26")
 
     shifts = db.get_open_shifts()
     if not shifts:
@@ -152,10 +164,14 @@ async def search_nearby_shifts(message: types.Message):
 @dp.message(F.text == "💼 Мой баланс и профиль")
 async def student_profile(message: types.Message):
     user = db.get_user(message.from_user.id)
+    if not user:
+        db.upsert_user(message.from_user.id, "student", message.from_user.full_name, message.from_user.username)
+        user = db.get_user(message.from_user.id)
+
     shifts_count = user.get("completed_shifts", 0) if user else 0
     earnings = shifts_count * 5000
-    institution = user.get("institution", "СКУ им. М. Козыбаева") if user else "СКУ им. М. Козыбаева"
-    campus = user.get("campus", "ул. Интернациональная 26") if user else "ул. Интернациональная 26"
+    institution = (user.get("institution") if user and user.get("institution") else "СКУ им. М. Козыбаева")
+    campus = (user.get("campus") if user and user.get("campus") else "ул. Интернациональная 26")
 
     text = (
         f"👤 <b>Профиль студента:</b> {message.from_user.full_name}\n"
@@ -170,6 +186,7 @@ async def student_profile(message: types.Message):
 
 @dp.message(F.text == "🏫 Сменить колледж / вуз")
 async def change_campus(message: types.Message):
+    db.upsert_user(message.from_user.id, "student", message.from_user.full_name, message.from_user.username)
     await message.answer("Выберите ваш колледж или университет в СКО:", reply_markup=kb.get_institution_keyboard())
 
 # ==================== ДЕЙСТВИЯ РАБОТОДАТЕЛЯ ====================
