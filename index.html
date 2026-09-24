@@ -45,6 +45,17 @@
   </script>
 
   <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
     /* Light Liquid Glassmorphism Styling */
     .glass-panel {
       background: rgba(255, 255, 255, 0.72);
@@ -210,15 +221,15 @@
   <div class="parallax-orb w-96 h-96 bg-purple-200/40 top-[1800px] right-10" id="orb-3"></div>
 
   <!-- NAVIGATION -->
-  <nav class="sticky top-4 z-50 max-w-6xl mx-auto px-4 sm:px-6">
-    <div class="glass-panel rounded-2xl px-5 py-3.5 flex items-center justify-between shadow-lg">
-      <div class="flex items-center gap-3">
-        <div class="w-10 h-10 rounded-xl bg-white p-1 border border-slate-200/80 shadow-md shadow-blue-500/10 flex items-center justify-center overflow-hidden shrink-0">
+  <nav class="sticky top-4 z-50 max-w-6xl mx-auto px-3 sm:px-6">
+    <div class="glass-panel rounded-2xl px-3.5 sm:px-5 py-2.5 sm:py-3.5 flex items-center justify-between shadow-lg">
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white p-1 border border-slate-200/80 shadow-md shadow-blue-500/10 flex items-center justify-center overflow-hidden shrink-0">
           <img src="logo.png" alt="SKO Shift Logo" class="w-full h-full object-contain">
         </div>
         <div>
-          <div class="font-extrabold text-lg text-slate-900 tracking-tight leading-none">SKO Shift</div>
-          <div class="text-[11px] font-semibold text-emerald-600 tracking-wider uppercase mt-0.5">Петропавловск • СКО</div>
+          <div class="font-extrabold text-base sm:text-lg text-slate-900 tracking-tight leading-none">SKO Shift</div>
+          <div class="text-[10px] sm:text-[11px] font-semibold text-emerald-600 tracking-wider uppercase mt-0.5">Петропавловск • СКО</div>
         </div>
       </div>
 
@@ -230,8 +241,8 @@
         <a href="#team" class="hover:text-blue-600 transition">Команда</a>
       </div>
 
-      <div class="flex items-center gap-3">
-        <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary text-xs sm:text-sm font-bold px-5 py-2.5 rounded-2xl flex items-center gap-2">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary text-xs sm:text-sm font-bold px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-xl sm:rounded-2xl flex items-center gap-1.5 sm:gap-2">
           <span>@SKO_Shift_bot</span>
         </a>
       </div>
@@ -252,47 +263,47 @@
           Платформа экспресс-подработки • Петропавловск
         </div>
 
-        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-[1.15]">
           Быстрые деньги студентам.<br>
           <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-600 via-indigo-600 to-emerald-600">
             Надежные руки бизнесу города.
           </span>
         </h1>
 
-        <p class="text-lg sm:text-xl text-slate-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+        <p class="text-base sm:text-xl text-slate-600 font-medium max-w-2xl mx-auto lg:mx-0 leading-relaxed">
           Интеллектуальная AI-платформа моментального мэтчинга вечерних микро-смен на <b class="text-slate-900">3–4 часа</b> для учащихся <b class="text-slate-900">25+ колледжей и университета СКО</b> с малым бизнесом Петропавловска.
         </p>
 
         <!-- Liquid Glass CTAs (No broken icons) -->
-        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-          <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary w-full sm:w-auto text-base font-bold px-8 py-4 rounded-2xl flex items-center justify-center shadow-xl">
+        <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4">
+          <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary w-full sm:w-auto text-sm sm:text-base font-bold px-7 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-xl">
             <span>Запустить Telegram-бота</span>
           </a>
-          <a href="#simulator" class="liquid-glass-btn-secondary w-full sm:w-auto text-slate-800 text-base font-bold px-7 py-4 rounded-2xl flex items-center justify-center gap-2">
+          <a href="#simulator" class="liquid-glass-btn-secondary w-full sm:w-auto text-slate-800 text-sm sm:text-base font-bold px-6 sm:px-7 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl flex items-center justify-center gap-2">
             <span>Протестировать AI-демо</span>
             <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
           </a>
         </div>
 
         <!-- Trust Badges -->
-        <div class="pt-6 grid grid-cols-3 gap-3 max-w-lg mx-auto lg:mx-0 border-t border-slate-200/60">
-          <div>
-            <div class="text-2xl font-extrabold text-blue-600">0.7 сек</div>
-            <div class="text-xs text-slate-500 font-semibold mt-0.5">ИИ-парсинг Gemini</div>
+        <div class="pt-6 grid grid-cols-3 gap-2 sm:gap-3 max-w-lg mx-auto lg:mx-0 border-t border-slate-200/60 text-center sm:text-left">
+          <div class="p-1">
+            <div class="text-xl sm:text-2xl font-extrabold text-blue-600">0.7 сек</div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold mt-0.5">ИИ-парсинг Gemini</div>
           </div>
-          <div>
-            <div class="text-2xl font-extrabold text-emerald-600">18 000+</div>
-            <div class="text-xs text-slate-500 font-semibold mt-0.5">Студентов в СКО</div>
+          <div class="p-1">
+            <div class="text-xl sm:text-2xl font-extrabold text-emerald-600">18 000+</div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold mt-0.5">Студентов в СКО</div>
           </div>
-          <div>
-            <div class="text-2xl font-extrabold text-indigo-600">Kaspi</div>
-            <div class="text-xs text-slate-500 font-semibold mt-0.5">Выплаты день-в-день</div>
+          <div class="p-1">
+            <div class="text-xl sm:text-2xl font-extrabold text-indigo-600">Kaspi</div>
+            <div class="text-[10px] sm:text-xs text-slate-500 font-semibold mt-0.5">Выплаты день-в-день</div>
           </div>
         </div>
       </div>
 
       <!-- Right Column: Interactive 3D Smartphone Mockup with Telegram Bot -->
-      <div class="lg:col-span-5 relative flex justify-center phone-container z-10" id="phone-wrapper">
+      <div class="lg:col-span-5 relative flex justify-center phone-container z-10 w-full" id="phone-wrapper">
         
         <!-- Floating Glass Orbit Badges (Strictly 100% SVG, Zero Emojis) -->
         <div class="orbit-card absolute -top-4 -left-6 z-20 px-4 py-3 rounded-2xl hidden sm:flex items-center gap-3" id="parallax-orbit-1">
@@ -316,7 +327,7 @@
         </div>
 
         <!-- The 3D Smartphone (Authentic Telegram Mobile Interface) -->
-        <div class="phone-mockup relative w-[310px] sm:w-[350px] rounded-[50px] bg-[#1e293b] p-3 shadow-2xl border-4 border-slate-700/60" id="interactive-phone">
+        <div class="phone-mockup relative w-full max-w-[315px] sm:max-w-[350px] mx-auto rounded-[44px] sm:rounded-[50px] bg-[#1e293b] p-2.5 sm:p-3 shadow-2xl border-4 border-slate-700/60" id="interactive-phone">
           <!-- Glass reflection glare -->
           <div class="absolute inset-0 rounded-[46px] bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none z-30"></div>
 
@@ -516,64 +527,64 @@
   </header>
 
   <!-- LIVE INTERACTIVE AI SIMULATOR -->
-  <section id="simulator" class="py-16 px-4 sm:px-6 max-w-6xl mx-auto">
-    <div class="glass-panel rounded-3xl p-6 sm:p-10 shadow-xl border border-blue-100">
+  <section id="simulator" class="py-12 sm:py-16 px-3 sm:px-6 max-w-6xl mx-auto">
+    <div class="glass-panel rounded-3xl p-4 sm:p-8 md:p-10 shadow-xl border border-blue-100">
       
-      <div class="text-center max-w-2xl mx-auto mb-10">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold mb-3">
+      <div class="text-center max-w-2xl mx-auto mb-8 sm:mb-10">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] sm:text-xs font-bold mb-3">
           <svg class="w-3.5 h-3.5 text-blue-600 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"/></svg>
           <span>Интерактивный полигон для жюри и бизнеса</span>
         </div>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
           Попробуйте AI-парсер прямо здесь
         </h2>
-        <p class="text-slate-600 mt-2 text-sm sm:text-base">
+        <p class="text-slate-600 mt-2 text-xs sm:text-base leading-relaxed">
           Введите любую задачу в свободной форме или выберите готовый сценарий — искусственный интеллект Google Gemini структурирует заявку и рассчитает пешую доступность от учебных заведений Петропавловска.
         </p>
       </div>
 
       <!-- Simulator Presets (Zero emojis, clean SVGs) -->
-      <div class="flex flex-wrap gap-2.5 justify-center mb-6">
-        <button onclick="setPrompt(1)" class="liquid-glass-btn-secondary text-xs font-bold text-slate-700 px-4 py-2.5 rounded-xl flex items-center gap-2">
-          <svg class="w-3.5 h-3.5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-          <span>Разгрузка в Dostyk Mall (3ч • 5 000 ₸)</span>
+      <div class="flex flex-col sm:flex-row flex-wrap gap-2 justify-center mb-6">
+        <button onclick="setPrompt(1)" class="liquid-glass-btn-secondary text-[11px] sm:text-xs font-bold text-slate-700 px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-2">
+          <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+          <span class="text-center">Разгрузка в Dostyk Mall (3ч • 5 000 ₸)</span>
         </button>
-        <button onclick="setPrompt(2)" class="liquid-glass-btn-secondary text-xs font-bold text-slate-700 px-4 py-2.5 rounded-xl flex items-center gap-2">
-          <svg class="w-3.5 h-3.5 text-amber-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
-          <span>Помощник бариста на Конституции (4ч • 6 000 ₸)</span>
+        <button onclick="setPrompt(2)" class="liquid-glass-btn-secondary text-[11px] sm:text-xs font-bold text-slate-700 px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-2">
+          <svg class="w-3.5 h-3.5 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8zM6 1v3M10 1v3M14 1v3"/></svg>
+          <span class="text-center">Помощник бариста на Конституции (4ч • 6 000 ₸)</span>
         </button>
-        <button onclick="setPrompt(3)" class="liquid-glass-btn-secondary text-xs font-bold text-slate-700 px-4 py-2.5 rounded-xl flex items-center gap-2">
-          <svg class="w-3.5 h-3.5 text-indigo-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a6 6 0 000-12m2 15a9 9 0 000-18"/></svg>
-          <span>Промоутер возле City Mall (2ч • 4 000 ₸)</span>
+        <button onclick="setPrompt(3)" class="liquid-glass-btn-secondary text-[11px] sm:text-xs font-bold text-slate-700 px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-2">
+          <svg class="w-3.5 h-3.5 text-indigo-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a6 6 0 000-12m2 15a9 9 0 000-18"/></svg>
+          <span class="text-center">Промоутер возле City Mall (2ч • 4 000 ₸)</span>
         </button>
       </div>
 
       <!-- Input Bar (Clean, integrated flex container - never clips or overflows) -->
-      <div class="max-w-3xl mx-auto mb-8 bg-white rounded-2xl border-2 border-slate-200/90 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100/60 p-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 transition-all">
+      <div class="max-w-3xl mx-auto mb-6 sm:mb-8 bg-white rounded-2xl border-2 border-slate-200/90 shadow-sm focus-within:border-blue-500 focus-within:ring-4 focus-within:ring-blue-100/60 p-1.5 sm:p-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-2 transition-all">
         <input id="prompt-input" type="text" value="Нужен помощник на разгрузку обуви в Dostyk Mall на 3 часа, оплата 5 000 ₸ сразу на Kaspi"
-          class="flex-1 bg-transparent px-4 py-2.5 text-sm sm:text-base text-slate-900 font-medium outline-none min-w-0"
+          class="flex-1 bg-transparent px-3 sm:px-4 py-2 sm:py-2.5 text-xs sm:text-base text-slate-900 font-medium outline-none min-w-0"
           placeholder="Опишите смену одной строкой...">
-        <button onclick="runSimulator()" id="run-btn" class="liquid-glass-btn-primary shrink-0 px-6 py-3 rounded-xl text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md">
+        <button onclick="runSimulator()" id="run-btn" class="liquid-glass-btn-primary shrink-0 px-5 sm:px-6 py-2.5 sm:py-3 rounded-xl text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-pointer shadow-md">
           <span>Анализ AI</span>
           <svg class="w-4 h-4 fill-current shrink-0" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
         </button>
       </div>
 
       <!-- Live Simulator Output Box -->
-      <div id="sim-output" class="max-w-3xl mx-auto bg-slate-900 rounded-2xl p-6 text-slate-100 font-mono text-xs shadow-2xl border border-slate-800">
-        <div class="flex items-center justify-between pb-3 border-b border-slate-800 text-slate-400 text-[11px]">
-          <span class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            Google Gemini 3.5 Flash Lite • AI Response Status: 200 OK
+      <div id="sim-output" class="max-w-3xl mx-auto bg-slate-900 rounded-2xl p-4 sm:p-6 text-slate-100 font-mono text-xs shadow-2xl border border-slate-800 overflow-hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 pb-3 border-b border-slate-800 text-slate-400 text-[10px] sm:text-[11px]">
+          <span class="flex items-center gap-2 min-w-0">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+            <span class="truncate">Google Gemini 3.5 Flash Lite • Status: 200 OK</span>
           </span>
-          <span id="sim-timer" class="text-emerald-400 font-bold">Время: 0.68 сек</span>
+          <span id="sim-timer" class="text-emerald-400 font-bold self-start sm:self-auto shrink-0">Время: 0.68 сек</span>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-6 pt-4">
+        <div class="grid md:grid-cols-2 gap-4 sm:gap-6 pt-4 min-w-0">
           <!-- Structured JSON output -->
-          <div>
+          <div class="min-w-0">
             <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider mb-2 font-sans">Извлеченный JSON:</div>
-            <pre id="json-code" class="text-blue-300 text-[11px] leading-relaxed bg-slate-950 p-3.5 rounded-xl border border-slate-800 overflow-x-auto no-scrollbar">{
+            <pre id="json-code" class="text-blue-300 text-[10px] sm:text-[11px] leading-relaxed bg-slate-950 p-3 sm:p-3.5 rounded-xl border border-slate-800 overflow-x-auto whitespace-pre-wrap break-all sm:break-normal min-w-0">{
   "category": "Погрузка / Разгрузка",
   "location": "ТРЦ Dostyk Mall (ул. Жамбыла 119)",
   "duration_hours": 3,
@@ -584,44 +595,47 @@
           </div>
 
           <!-- Calculated Geo Route (Zero Emojis, Clean SVGs) -->
-          <div class="space-y-3 font-sans">
+          <div class="space-y-2.5 font-sans min-w-0">
             <div class="text-slate-400 text-[10px] uppercase font-bold tracking-wider mb-1">Маршрут от учебных корпусов СКО:</div>
             
-            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
-              <div class="flex items-center justify-between text-white font-bold text-xs">
-                <span class="flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-                  Колледж им. М. Жумабаева
+            <div class="bg-slate-800/80 p-2.5 sm:p-3 rounded-xl border border-slate-700">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-white font-bold text-xs">
+                <span class="flex items-center gap-1.5 min-w-0">
+                  <svg class="w-3.5 h-3.5 text-blue-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+                  <span class="truncate sm:whitespace-normal">Колледж им. М. Жумабаева</span>
                 </span>
-                <span class="text-emerald-400 font-extrabold">10 мин пешком</span>
+                <span class="text-emerald-400 font-extrabold text-[10px] sm:text-xs shrink-0 bg-emerald-950/60 px-2 py-0.5 rounded-md border border-emerald-800/50 self-start sm:self-auto">10 мин пешком</span>
               </div>
-              <div class="text-slate-400 text-[11px] mt-0.5">Расстояние: ~850 метров по ул. Абая / Жамбыла</div>
+              <div class="text-slate-400 text-[10px] sm:text-[11px] mt-1">Расстояние: ~850 метров по ул. Абая / Жамбыла</div>
             </div>
 
-            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
-              <div class="flex items-center justify-between text-white font-bold text-xs">
-                <span class="flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
-                  СКУ им. М. Козыбаева (Интернациональная)
+            <div class="bg-slate-800/80 p-2.5 sm:p-3 rounded-xl border border-slate-700">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-white font-bold text-xs">
+                <span class="flex items-center gap-1.5 min-w-0">
+                  <svg class="w-3.5 h-3.5 text-indigo-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                  <span class="truncate sm:whitespace-normal">СКУ им. М. Козыбаева</span>
                 </span>
-                <span class="text-blue-400 font-extrabold">12 мин пешком</span>
+                <span class="text-blue-400 font-extrabold text-[10px] sm:text-xs shrink-0 bg-blue-950/60 px-2 py-0.5 rounded-md border border-blue-800/50 self-start sm:self-auto">12 мин пешком</span>
               </div>
-              <div class="text-slate-400 text-[11px] mt-0.5">Расстояние: ~1.1 км</div>
+              <div class="text-slate-400 text-[10px] sm:text-[11px] mt-1">Расстояние: ~1.1 км (Интернациональная)</div>
             </div>
 
-            <div class="bg-slate-800/80 p-3 rounded-xl border border-slate-700">
-              <div class="flex items-center justify-between text-white font-bold text-xs">
-                <span class="flex items-center gap-1.5">
-                  <svg class="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-                  ПКМиТ им. Б. Ашимова (ул. Ю. Медведева 1А)
+            <div class="bg-slate-800/80 p-2.5 sm:p-3 rounded-xl border border-slate-700">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-1 text-white font-bold text-xs">
+                <span class="flex items-center gap-1.5 min-w-0">
+                  <svg class="w-3.5 h-3.5 text-amber-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1.51V21a2 2 0 01-2 2 2 2 0 01-2-2v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 01-2-2 2 2 0 012-2h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 012-2 2 2 0 012 2v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 012 2 2 2 0 01-2 2h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+                  <span class="truncate sm:whitespace-normal">ПКМиТ им. Б. Ашимова</span>
                 </span>
-                <span class="text-amber-400 font-extrabold">12 мин на автобусе</span>
+                <span class="text-amber-400 font-extrabold text-[10px] sm:text-xs shrink-0 bg-amber-950/60 px-2 py-0.5 rounded-md border border-amber-800/50 self-start sm:self-auto">12 мин на автобусе</span>
               </div>
-              <div class="text-slate-400 text-[11px] mt-0.5">Расстояние: ~3.2 км (прямой автобус №24 / №4А)</div>
+              <div class="text-slate-400 text-[10px] sm:text-[11px] mt-1">Расстояние: ~3.2 км (ул. Ю. Медведева 1А, авт. №24 / №4А)</div>
             </div>
           </div>
         </div>
       </div>
+
+    </div>
+  </section>
 
     </div>
   </section>
@@ -698,47 +712,47 @@
   </section>
 
   <!-- STUDENT EARNINGS CALCULATOR -->
-  <section id="calculator" class="py-20 px-4 sm:px-6 max-w-5xl mx-auto">
-    <div class="glass-panel rounded-3xl p-8 sm:p-12 shadow-xl border border-emerald-100 relative overflow-hidden">
+  <section id="calculator" class="py-12 sm:py-20 px-3 sm:px-6 max-w-5xl mx-auto">
+    <div class="glass-panel rounded-3xl p-5 sm:p-8 md:p-12 shadow-xl border border-emerald-100 relative overflow-hidden">
       
       <div class="absolute -right-20 -bottom-20 w-64 h-64 rounded-full bg-emerald-200/40 blur-3xl pointer-events-none"></div>
 
-      <div class="grid md:grid-cols-12 gap-8 items-center">
+      <div class="grid md:grid-cols-12 gap-6 sm:gap-8 items-center">
         
-        <div class="md:col-span-7 space-y-6">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+        <div class="md:col-span-7 space-y-5 sm:space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-[11px] sm:text-xs font-bold">
+            <svg class="w-4 h-4 text-emerald-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
             <span>Калькулятор честного заработка студента</span>
           </div>
-          <h2 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             Сколько ты сможешь зарабатывать без вреда учебе?
           </h2>
-          <p class="text-slate-600 text-sm leading-relaxed">
+          <p class="text-slate-600 text-xs sm:text-sm leading-relaxed">
             Смены длятся всего 3–4 часа вечером (после 16:30). Ты не прогуливаешь лекции, лабораторные и практику в колледже, но получаешь реальные деньги на личные расходы.
           </p>
 
           <!-- Range 1: Shifts per week -->
           <div class="space-y-2">
-            <div class="flex justify-between text-sm font-bold text-slate-800">
+            <div class="flex justify-between text-xs sm:text-sm font-bold text-slate-800">
               <span>Смен в неделю:</span>
-              <span id="shifts-val" class="text-blue-600 font-extrabold text-base">3 смены</span>
+              <span id="shifts-val" class="text-blue-600 font-extrabold text-sm sm:text-base">3 смены</span>
             </div>
             <input id="shifts-range" type="range" min="1" max="6" value="3" class="w-full h-2.5 bg-slate-200 rounded-lg cursor-pointer" oninput="calcEarnings()">
-            <div class="flex justify-between text-[11px] text-slate-400 font-semibold">
-              <span>1 смена (на выходных)</span>
-              <span>3 смены (оптимально)</span>
+            <div class="flex justify-between text-[10px] sm:text-[11px] text-slate-400 font-semibold">
+              <span>1 смена (выходные)</span>
+              <span>3 смены (норма)</span>
               <span>6 смен (максимум)</span>
             </div>
           </div>
 
           <!-- Range 2: Rate per shift -->
           <div class="space-y-2">
-            <div class="flex justify-between text-sm font-bold text-slate-800">
-              <span>Средняя оплата за смену (3ч):</span>
-              <span id="rate-val" class="text-emerald-600 font-extrabold text-base">5 000 ₸</span>
+            <div class="flex justify-between text-xs sm:text-sm font-bold text-slate-800">
+              <span>Оплата за смену (3ч):</span>
+              <span id="rate-val" class="text-emerald-600 font-extrabold text-sm sm:text-base">5 000 ₸</span>
             </div>
             <input id="rate-range" type="range" min="4000" max="8000" step="500" value="5000" class="w-full h-2.5 bg-slate-200 rounded-lg cursor-pointer" oninput="calcEarnings()">
-            <div class="flex justify-between text-[11px] text-slate-400 font-semibold">
+            <div class="flex justify-between text-[10px] sm:text-[11px] text-slate-400 font-semibold">
               <span>4 000 ₸</span>
               <span>5 500 ₸</span>
               <span>8 000 ₸</span>
@@ -748,18 +762,18 @@
 
         <!-- Result Card -->
         <div class="md:col-span-5">
-          <div class="bg-gradient-to-br from-slate-900 to-slate-950 rounded-3xl p-7 text-white shadow-2xl border border-slate-800 text-center space-y-4">
-            <div class="text-xs uppercase font-extrabold tracking-widest text-slate-400">Твой доход за месяц:</div>
-            <div id="monthly-income" class="text-4xl sm:text-5xl font-extrabold text-emerald-400 tracking-tight">
+          <div class="bg-gradient-to-br from-slate-900 to-slate-950 rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white shadow-2xl border border-slate-800 text-center space-y-4">
+            <div class="text-[10px] sm:text-xs uppercase font-extrabold tracking-widest text-slate-400">Твой доход за месяц:</div>
+            <div id="monthly-income" class="text-3xl sm:text-5xl font-extrabold text-emerald-400 tracking-tight">
               60 000 ₸
             </div>
             <div class="text-xs text-slate-300 font-medium">
               = <span id="weekly-income" class="font-bold text-white">15 000 ₸</span> в неделю прямо на Kaspi Gold
             </div>
-            <div class="pt-4 border-t border-slate-800 text-[11px] text-slate-300 leading-relaxed text-left space-y-1.5">
+            <div class="pt-4 border-t border-slate-800 text-[10px] sm:text-[11px] text-slate-300 leading-relaxed text-left space-y-1.5">
               <div class="flex items-center gap-2">
                 <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-                <span>Занятость: всего 9–12 часов в неделю</span>
+                <span>Занятость: 9–12 часов в неделю</span>
               </div>
               <div class="flex items-center gap-2">
                 <svg class="w-3.5 h-3.5 text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
@@ -770,7 +784,7 @@
                 <span>Моментальная выплата в конце дня</span>
               </div>
             </div>
-            <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary w-full block text-white text-xs font-bold py-3.5 rounded-xl shadow-lg mt-2 text-center">
+            <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary w-full block text-white text-xs sm:text-sm font-bold py-3 sm:py-3.5 rounded-xl shadow-lg mt-2 text-center">
               Начать зарабатывать в боте →
             </a>
           </div>
@@ -970,48 +984,48 @@
   </section>
 
   <!-- CTA & QR CODE FOOTER -->
-  <footer class="py-20 px-4 sm:px-6 max-w-5xl mx-auto">
-    <div class="glass-panel rounded-3xl p-8 sm:p-14 shadow-2xl border border-blue-200 text-center relative overflow-hidden">
+  <footer class="py-12 sm:py-20 px-3 sm:px-6 max-w-5xl mx-auto">
+    <div class="glass-panel rounded-3xl p-6 sm:p-10 md:p-14 shadow-2xl border border-blue-200 text-center relative overflow-hidden">
       
-      <div class="max-w-xl mx-auto space-y-6">
+      <div class="max-w-xl mx-auto space-y-5 sm:space-y-6">
         <!-- Official Logo Brand Badge -->
         <div class="flex items-center justify-center gap-3">
-          <div class="w-12 h-12 rounded-2xl bg-white p-1 border border-slate-200/90 shadow-md flex items-center justify-center overflow-hidden shrink-0">
+          <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-white p-1 border border-slate-200/90 shadow-md flex items-center justify-center overflow-hidden shrink-0">
             <img src="logo.png" alt="SKO Shift Logo" class="w-full h-full object-contain">
           </div>
           <div class="text-left">
-            <div class="font-black text-xl text-slate-900 tracking-tight leading-none">SKO Shift</div>
-            <div class="text-xs font-semibold text-emerald-600 tracking-wider uppercase mt-1">Петропавловск • СКО</div>
+            <div class="font-black text-lg sm:text-xl text-slate-900 tracking-tight leading-none">SKO Shift</div>
+            <div class="text-[10px] sm:text-xs font-semibold text-emerald-600 tracking-wider uppercase mt-1">Петропавловск • СКО</div>
           </div>
         </div>
 
-        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-xs font-bold">
-          <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-200 text-blue-700 text-[11px] sm:text-xs font-bold">
+          <svg class="w-3.5 h-3.5 text-blue-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
           <span>Прямо сейчас в Telegram</span>
         </div>
 
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <h2 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
           Открой SKO Shift на своем смартфоне
         </h2>
 
-        <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
-          Наведите камеру смартфона на QR-код или нажмите на кнопку ниже, чтобы запустить живое демо мэтчинга смен прямо сейчас.
+        <p class="text-slate-600 text-xs sm:text-base leading-relaxed">
+          Наведите камеру смартфона на QR-код или нажмите на кнопку ниже, чтобы запустить мэтчинг смен прямо сейчас.
         </p>
 
         <!-- QR Code display -->
-        <div class="inline-block p-4 bg-white rounded-3xl shadow-xl border border-slate-200">
-          <img src="qr_code.png" alt="Telegram Bot QR" class="w-44 h-auto mx-auto rounded-2xl">
+        <div class="inline-block p-3 sm:p-4 bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-slate-200">
+          <img src="qr_code.png" alt="Telegram Bot QR" class="w-36 sm:w-44 h-auto mx-auto rounded-xl sm:rounded-2xl">
           <div class="text-[11px] font-bold text-blue-600 mt-2">@SKO_Shift_bot</div>
         </div>
 
         <div>
-          <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary inline-flex text-white text-base font-bold px-8 py-4 rounded-2xl items-center gap-3 shadow-xl">
+          <a href="https://t.me/SKO_Shift_bot" target="_blank" class="liquid-glass-btn-primary inline-flex text-white text-sm sm:text-base font-bold px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-2xl items-center justify-center gap-2.5 sm:gap-3 shadow-xl w-full sm:w-auto">
             <span>Перейти в Telegram-бота</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
           </a>
         </div>
 
-        <div class="text-xs text-slate-500 pt-4">
+        <div class="text-[11px] sm:text-xs text-slate-500 pt-3 sm:pt-4 leading-relaxed">
           © 2026 SKO Shift • Платформа экспресс-подработки для студентов колледжей и вузов СКО (Петропавловск)
         </div>
       </div>
