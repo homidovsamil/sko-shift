@@ -640,9 +640,82 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how-it-works" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
-    <div class="text-center max-w-2xl mx-auto mb-14">
+  <!-- HOW IT WORKS WITH SVG FOLLOW SCROLL (Inspired by 21st.dev) -->
+  <section id="how-it-works" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto relative overflow-hidden">
+    
+    <!-- Desktop Horizontal SVG Follow Scroll Ribbon -->
+    <div class="hidden md:flex absolute inset-0 pointer-events-none z-0 overflow-hidden items-center justify-center select-none" aria-hidden="true">
+      <svg
+        viewBox="0 0 1200 600"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full h-full max-w-6xl opacity-35 mix-blend-multiply"
+        style="will-change: stroke-dashoffset;"
+      >
+        <defs>
+          <linearGradient id="sko-scroll-grad-desk" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2563EB" />
+            <stop offset="40%" stop-color="#3B82F6" />
+            <stop offset="70%" stop-color="#06B6D4" />
+            <stop offset="100%" stop-color="#10B981" />
+          </linearGradient>
+          <filter id="sko-glow-desk" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="6" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path
+          id="sko-follow-scroll-path-desk"
+          d="M 40,260 C 160,150 290,160 350,260 C 400,360 270,480 180,430 C 100,380 150,260 290,280 C 440,300 480,160 600,180 C 720,200 740,390 610,450 C 490,500 550,300 700,260 C 820,220 890,140 1000,160 C 1110,180 1150,370 1030,460 C 910,550 780,470 850,380 C 920,290 1080,330 1150,530"
+          stroke="url(#sko-scroll-grad-desk)"
+          stroke-width="14"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          filter="url(#sko-glow-desk)"
+        />
+      </svg>
+    </div>
+
+    <!-- Mobile Vertical SVG Follow Scroll Ribbon -->
+    <div class="flex md:hidden absolute inset-0 pointer-events-none z-0 overflow-hidden items-center justify-center select-none" aria-hidden="true">
+      <svg
+        viewBox="0 0 360 1200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+        class="w-full h-full max-h-[1250px] opacity-35 mix-blend-multiply"
+        style="will-change: stroke-dashoffset;"
+      >
+        <defs>
+          <linearGradient id="sko-scroll-grad-mob" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#2563EB" />
+            <stop offset="40%" stop-color="#3B82F6" />
+            <stop offset="70%" stop-color="#06B6D4" />
+            <stop offset="100%" stop-color="#10B981" />
+          </linearGradient>
+          <filter id="sko-glow-mob" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <path
+          id="sko-follow-scroll-path-mob"
+          d="M 280,160 C 120,180 40,270 160,340 C 300,420 320,250 170,270 C 50,290 40,510 180,570 C 320,630 330,760 180,800 C 40,840 60,1020 190,1070 C 310,1110 270,980 170,950 C 80,920 60,1040 120,1140"
+          stroke="url(#sko-scroll-grad-mob)"
+          stroke-width="12"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          filter="url(#sko-glow-mob)"
+        />
+      </svg>
+    </div>
+
+    <div class="text-center max-w-2xl mx-auto mb-14 relative z-10">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold mb-3">
         <svg class="w-3.5 h-3.5 text-emerald-600 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"/></svg>
         <span>60 секунд от заявки до выхода на смену</span>
@@ -655,7 +728,7 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6">
+    <div class="grid md:grid-cols-3 gap-6 relative z-10">
       
       <!-- Card 1 -->
       <div class="glass-card rounded-3xl p-8 relative flex flex-col justify-between">
@@ -1219,6 +1292,66 @@
       document.getElementById('monthly-income').textContent = monthly.toLocaleString('ru-RU') + ' ₸';
     }
     calcEarnings();
+
+    // 5. SVG Follow Scroll Animation (Brand colors: Blue -> Cyan -> Emerald)
+    function initSvgFollowScroll() {
+      const section = document.getElementById('how-it-works');
+      if (!section) return;
+
+      const pathDesk = document.getElementById('sko-follow-scroll-path-desk');
+      const pathMob = document.getElementById('sko-follow-scroll-path-mob');
+      const paths = [pathDesk, pathMob].filter(Boolean);
+
+      function setupLengths() {
+        paths.forEach(p => {
+          try {
+            const len = p.getTotalLength();
+            p.dataset.length = len;
+            p.style.strokeDasharray = `${len} ${len}`;
+          } catch (e) {}
+        });
+      }
+      setupLengths();
+
+      let ticking = false;
+
+      function updatePath() {
+        const rect = section.getBoundingClientRect();
+        const winH = window.innerHeight || document.documentElement.clientHeight;
+
+        // Start drawing when the section top enters the bottom 90% of screen
+        // Finish drawing when section bottom passes 15% of screen
+        const startY = winH * 0.9;
+        const endY = -rect.height * 0.15;
+        const totalDistance = startY - endY;
+        const currentDistance = startY - rect.top;
+
+        let progress = currentDistance / totalDistance;
+        progress = Math.max(0, Math.min(1, progress));
+
+        paths.forEach(p => {
+          const len = parseFloat(p.dataset.length) || 2500;
+          p.style.strokeDashoffset = `${len * (1 - progress)}`;
+        });
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          requestAnimationFrame(updatePath);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => {
+        setupLengths();
+        onScroll();
+      }, { passive: true });
+
+      updatePath();
+    }
+    initSvgFollowScroll();
   </script>
 </body>
 </html>
