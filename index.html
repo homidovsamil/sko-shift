@@ -640,110 +640,9 @@
     </div>
   </section>
 
-  <!-- HOW IT WORKS WITH SVG FOLLOW SCROLL (Inspired by 21st.dev) -->
-  <section id="how-it-works" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto relative overflow-hidden">
-    
-    <!-- Desktop Horizontal SVG Follow Scroll Ribbon -->
-    <div class="hidden md:flex absolute inset-0 pointer-events-none z-0 overflow-hidden items-center justify-center select-none" aria-hidden="true">
-      <svg
-        viewBox="0 0 1200 600"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-full h-full max-w-6xl"
-        style="will-change: stroke-dashoffset;"
-      >
-        <defs>
-          <linearGradient id="sko-scroll-grad-desk" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#2563EB" />
-            <stop offset="35%" stop-color="#3B82F6" />
-            <stop offset="70%" stop-color="#00F0FF" />
-            <stop offset="100%" stop-color="#10B981" />
-          </linearGradient>
-          <filter id="sko-glow-desk" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#2563EB" flood-opacity="0.45" />
-          </filter>
-        </defs>
-
-        <!-- Ghost Guide Circuit Track -->
-        <path
-          d="M 20,260 C 90,80 180,40 240,110 C 290,170 210,230 160,160 C 120,110 240,40 370,150 C 420,200 390,470 450,520 C 510,570 670,570 730,510 C 790,460 760,190 820,140 C 900,70 980,50 1030,110 C 1070,170 1000,220 950,160 C 920,110 1040,50 1140,180 C 1190,250 1180,440 1120,530"
-          stroke="rgba(37, 99, 235, 0.16)"
-          stroke-width="18"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="8 12"
-        />
-
-        <!-- Active Vibrant Animated Path -->
-        <path
-          id="sko-follow-scroll-path-desk"
-          d="M 20,260 C 90,80 180,40 240,110 C 290,170 210,230 160,160 C 120,110 240,40 370,150 C 420,200 390,470 450,520 C 510,570 670,570 730,510 C 790,460 760,190 820,140 C 900,70 980,50 1030,110 C 1070,170 1000,220 950,160 C 920,110 1040,50 1140,180 C 1190,250 1180,440 1120,530"
-          stroke="url(#sko-scroll-grad-desk)"
-          stroke-width="20"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          filter="url(#sko-glow-desk)"
-        />
-
-        <!-- Glowing Tracer Beacon Head -->
-        <g id="sko-beacon-desk" style="opacity: 0; transition: opacity 0.2s ease;">
-          <circle id="sko-beacon-outer-desk" r="16" fill="#00F0FF" opacity="0.4" />
-          <circle id="sko-beacon-inner-desk" r="8" fill="#FFFFFF" stroke="#00F0FF" stroke-width="3.5" />
-        </g>
-      </svg>
-    </div>
-
-    <!-- Mobile Vertical SVG Follow Scroll Ribbon -->
-    <div class="flex md:hidden absolute inset-0 pointer-events-none z-0 overflow-hidden items-center justify-center select-none" aria-hidden="true">
-      <svg
-        viewBox="0 0 360 1200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        class="w-full h-full max-h-[1250px]"
-        style="will-change: stroke-dashoffset;"
-      >
-        <defs>
-          <linearGradient id="sko-scroll-grad-mob" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stop-color="#2563EB" />
-            <stop offset="35%" stop-color="#3B82F6" />
-            <stop offset="70%" stop-color="#00F0FF" />
-            <stop offset="100%" stop-color="#10B981" />
-          </linearGradient>
-          <filter id="sko-glow-mob" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#2563EB" flood-opacity="0.45" />
-          </filter>
-        </defs>
-
-        <!-- Ghost Guide Circuit Track Mobile -->
-        <path
-          d="M 40,140 C 120,60 260,60 300,140 C 330,200 270,260 210,200 C 170,150 280,80 320,200 C 350,310 350,430 240,460 C 130,490 40,450 30,560 C 20,640 100,720 180,680 C 240,650 210,560 140,580 C 60,600 40,750 120,810 C 200,860 320,870 330,960 C 340,1040 250,1090 170,1040 C 110,1000 130,900 220,920 C 310,940 330,1080 200,1160"
-          stroke="rgba(37, 99, 235, 0.16)"
-          stroke-width="12"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-dasharray="6 10"
-        />
-
-        <!-- Active Vibrant Animated Path Mobile -->
-        <path
-          id="sko-follow-scroll-path-mob"
-          d="M 40,140 C 120,60 260,60 300,140 C 330,200 270,260 210,200 C 170,150 280,80 320,200 C 350,310 350,430 240,460 C 130,490 40,450 30,560 C 20,640 100,720 180,680 C 240,650 210,560 140,580 C 60,600 40,750 120,810 C 200,860 320,870 330,960 C 340,1040 250,1090 170,1040 C 110,1000 130,900 220,920 C 310,940 330,1080 200,1160"
-          stroke="url(#sko-scroll-grad-mob)"
-          stroke-width="16"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          filter="url(#sko-glow-mob)"
-        />
-
-        <!-- Glowing Tracer Beacon Head Mobile -->
-        <g id="sko-beacon-mob" style="opacity: 0; transition: opacity 0.2s ease;">
-          <circle id="sko-beacon-outer-mob" r="14" fill="#00F0FF" opacity="0.4" />
-          <circle id="sko-beacon-inner-mob" r="7" fill="#FFFFFF" stroke="#00F0FF" stroke-width="3" />
-        </g>
-      </svg>
-    </div>
-
-    <div class="text-center max-w-2xl mx-auto mb-14 relative z-10">
+  <!-- HOW IT WORKS -->
+  <section id="how-it-works" class="py-20 px-4 sm:px-6 max-w-6xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-14">
       <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold mb-3">
         <svg class="w-3.5 h-3.5 text-emerald-600 fill-current" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M11.3 1.046A1 1 0 0112 2v5h4a1 1 0 01.82 1.573l-7 10A1 1 0 018 18v-5H4a1 1 0 01-.82-1.573l7-10a1 1 0 011.12-.381z" clip-rule="evenodd"/></svg>
         <span>60 секунд от заявки до выхода на смену</span>
@@ -756,7 +655,7 @@
       </p>
     </div>
 
-    <div class="grid md:grid-cols-3 gap-6 relative z-10">
+    <div class="grid md:grid-cols-3 gap-6">
       
       <!-- Card 1 -->
       <div class="glass-card rounded-3xl p-8 relative flex flex-col justify-between">
@@ -1320,111 +1219,6 @@
       document.getElementById('monthly-income').textContent = monthly.toLocaleString('ru-RU') + ' ₸';
     }
     calcEarnings();
-
-    // 5. SVG Follow Scroll Animation (Brand colors: Blue -> Cyan -> Emerald + Glowing Tracer Beacon)
-    function initSvgFollowScroll() {
-      const section = document.getElementById('how-it-works');
-      if (!section) return;
-
-      const pathDesk = document.getElementById('sko-follow-scroll-path-desk');
-      const pathMob = document.getElementById('sko-follow-scroll-path-mob');
-      const beaconDesk = document.getElementById('sko-beacon-desk');
-      const beaconOuterDesk = document.getElementById('sko-beacon-outer-desk');
-      const beaconInnerDesk = document.getElementById('sko-beacon-inner-desk');
-      const beaconMob = document.getElementById('sko-beacon-mob');
-      const beaconOuterMob = document.getElementById('sko-beacon-outer-mob');
-      const beaconInnerMob = document.getElementById('sko-beacon-inner-mob');
-
-      function setupPath(p) {
-        if (!p) return 0;
-        try {
-          const len = p.getTotalLength();
-          p.dataset.length = len;
-          p.style.strokeDasharray = `${len} ${len}`;
-          p.style.strokeDashoffset = `${len}`;
-          return len;
-        } catch (e) {
-          return 2600;
-        }
-      }
-
-      setupPath(pathDesk);
-      setupPath(pathMob);
-
-      let ticking = false;
-
-      function updatePath() {
-        const rect = section.getBoundingClientRect();
-        const winH = window.innerHeight || document.documentElement.clientHeight;
-
-        // Progress begins as section enters bottom 95% of screen
-        // and completes when cards are centered at ~25% of viewport
-        const startY = winH * 0.95;
-        const endY = winH * 0.25;
-        const totalDistance = startY - endY;
-        const currentDistance = startY - rect.top;
-
-        let progress = currentDistance / totalDistance;
-        progress = Math.max(0, Math.min(1, progress));
-
-        const isDesktop = window.innerWidth >= 768;
-
-        if (isDesktop && pathDesk) {
-          const len = parseFloat(pathDesk.dataset.length) || 2600;
-          const currentDrawn = len * progress;
-          pathDesk.style.strokeDashoffset = `${len - currentDrawn}`;
-
-          if (beaconDesk && progress > 0.01 && progress < 0.99) {
-            beaconDesk.style.opacity = '1';
-            try {
-              const pt = pathDesk.getPointAtLength(Math.max(1, Math.min(currentDrawn, len - 1)));
-              beaconOuterDesk.setAttribute('cx', pt.x);
-              beaconOuterDesk.setAttribute('cy', pt.y);
-              beaconInnerDesk.setAttribute('cx', pt.x);
-              beaconInnerDesk.setAttribute('cy', pt.y);
-            } catch (e) {}
-          } else if (beaconDesk) {
-            beaconDesk.style.opacity = '0';
-          }
-        } else if (!isDesktop && pathMob) {
-          const len = parseFloat(pathMob.dataset.length) || 2200;
-          const currentDrawn = len * progress;
-          pathMob.style.strokeDashoffset = `${len - currentDrawn}`;
-
-          if (beaconMob && progress > 0.01 && progress < 0.99) {
-            beaconMob.style.opacity = '1';
-            try {
-              const pt = pathMob.getPointAtLength(Math.max(1, Math.min(currentDrawn, len - 1)));
-              beaconOuterMob.setAttribute('cx', pt.x);
-              beaconOuterMob.setAttribute('cy', pt.y);
-              beaconInnerMob.setAttribute('cx', pt.x);
-              beaconInnerMob.setAttribute('cy', pt.y);
-            } catch (e) {}
-          } else if (beaconMob) {
-            beaconMob.style.opacity = '0';
-          }
-        }
-
-        ticking = false;
-      }
-
-      function onScroll() {
-        if (!ticking) {
-          requestAnimationFrame(updatePath);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', () => {
-        setupPath(pathDesk);
-        setupPath(pathMob);
-        onScroll();
-      }, { passive: true });
-
-      updatePath();
-    }
-    initSvgFollowScroll();
   </script>
 </body>
 </html>
