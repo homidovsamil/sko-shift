@@ -1,0 +1,16 @@
+name: Keep Render Bot Awake
+
+on:
+  schedule:
+    # Run every 10 minutes (prevents Render from spinning down due to inactivity)
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Render Service
+        run: |
+          echo "Pinging SKO Shift service on Render..."
+          curl -f -s -m 45 https://sko-shift.onrender.com/health || echo "Ping completed"

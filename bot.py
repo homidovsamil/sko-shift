@@ -391,6 +391,20 @@ async def start_healthcheck_server():
     except Exception as e:
         logger.info(f"Healthcheck port {port} skipped: {e}")
 
+async def keep_alive_task():
+    app_url = os.environ.get("RENDER_EXTERNAL_URL", "https://sko-shift.onrender.com").rstrip("/")
+    health_url = f"{app_url}/health"
+    await asyncio.sleep(30)
+    while True:
+        try:
+            import aiohttp
+            async with aiohttp.ClientSession() as session:
+                async with session.get(health_url, timeout=aiohttp.ClientTimeout(total=20)) as resp:
+                    logger.info(f"Keep-alive self-ping {health_url}: status {resp.status}")
+        except Exception as e:
+            logger.warning(f"Keep-alive self-ping warning: {e}")
+        await asyncio.sleep(420)  # Ping every 7 minutes (prevents Render 15-min idle sleep)
+
 async def main():
     db.init_db()
     if not bot:
@@ -402,6 +416,7 @@ async def main():
     print("="*60)
     
     await start_healthcheck_server()
+    asyncio.create_task(keep_alive_task())
     await dp.start_polling(bot)
 
 if __name__ == "__main__":
