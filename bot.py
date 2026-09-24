@@ -319,15 +319,17 @@ async def take_shift_callback(callback: types.CallbackQuery):
                 f"Студент <b>{student.full_name}</b> ({inst_name}) принял вашу смену.\n"
                 f"📦 Смена: <b>{shift['title']}</b> ({shift['pay_amount']:,} ₸)\n"
                 f"📱 Контакт: {student_contact}\n\n"
-                "Свяжитесь со студентом для уточнения деталей."
+                "Свяжитесь со студентом для координации. "
+                "По окончании работы нажмите кнопку ниже, чтобы зафиксировать выполнение и перевести оплату:"
             )
-            await bot.send_message(shift["employer_id"], alert_emp, parse_mode="HTML")
+            actions_markup = kb.get_employer_shift_actions_keyboard(shift_id, "matched")
+            await bot.send_message(shift["employer_id"], alert_emp, reply_markup=actions_markup, parse_mode="HTML")
         except Exception as e:
             logger.warning(f"Failed to notify employer: {e}")
 
     await callback.answer("Смена принята!")
 
-# ==================== ЗАКАЗЫ РАБОТОДАТЕЛЯ ====================
+# ==================== ЗАКАЗЫ РАБОТОДАТЕЛЯ И ОПЛАТА ====================
 
 @dp.message(F.text == "📊 Мои активные заказы")
 async def employer_active_orders(message: types.Message):
@@ -340,28 +342,85 @@ async def employer_active_orders(message: types.Message):
         )
         return
 
-    text = "📊 <b>Ваши заказы и смены:</b>\n\n"
+    await message.answer("📊 <b>Ваши заказы и смены:</b>", parse_mode="HTML")
     for s in shifts:
         if s["status"] == "open":
-            status_text = "🟢 Открыта (поиск исполнителя)"
+            status_text = "🟢 Открыта (поиск студента)"
         elif s["status"] == "matched":
-            status_text = "🤝 Исполнитель найден"
+            status_text = "🤝 Исполнитель найден (в работе)"
+        elif s["status"] == "cancelled":
+            status_text = "❌ Отменена"
         else:
-            status_text = "✅ Завершена"
+            status_text = "✅ Завершена и оплачена"
 
-        text += (
+        text = (
             f"📦 <b>{s['title']}</b>\n"
             f"• Статус: <b>{status_text}</b>\n"
             f"• Локация: {s['location_name']}\n"
-            f"• Оплата: {s['pay_amount']:,} ₸ ({s['time_window']})\n"
+            f"• Сумма: <b>{s['pay_amount']:,} ₸</b> ({s['time_window']})\n"
         )
         if s.get("student_name"):
             text += f"• Исполнитель: <b>{s['student_name']}</b> ({s.get('student_institution', 'СКО')})\n"
             if s.get("student_username"):
                 text += f"• Связь: @{s['student_username']}\n"
-        text += "────────────────────\n"
 
-    await message.answer(text, parse_mode="HTML")
+        actions_markup = kb.get_employer_shift_actions_keyboard(s["id"], s["status"])
+        await message.answer(text, reply_markup=actions_markup, parse_mode="HTML")
+
+@dp.callback_query(F.data.startswith("done_shift_"))
+async def done_shift_callback(callback: types.CallbackQuery):
+    shift_id = int(callback.data.replace("done_shift_", ""))
+    updated = db.complete_shift(shift_id, callback.from_user.id)
+    if not updated:
+        await callback.answer("Смена не найдена или уже завершена.", show_alert=True)
+        return
+
+    student_id = updated.get("assigned_student_id")
+    student_name = updated.get("student_name", "Студент")
+    student_username = updated.get("student_username")
+    contact = f"@{student_username}" if student_username else f"ID: {student_id}"
+
+    text_emp = (
+        "✅ <b>Смена успешно завершена!</b>\n\n"
+        f"📦 Смена: <b>{updated['title']}</b>\n"
+        f"🎓 Исполнитель: <b>{student_name}</b> ({contact})\n"
+        f"💰 Сумма к выплате: <b>{updated['pay_amount']:,} ₸</b>\n\n"
+        "💳 <b>Инструкция по выплате:</b>\n"
+        f"Переведите <b>{updated['pay_amount']:,} ₸</b> исполнителю через <b>Kaspi.kz</b> "
+        f"(«Переводы → Клиенту Kaspi» по контакту {contact})."
+    )
+    await callback.message.edit_text(text_emp, parse_mode="HTML")
+    await callback.answer("Смена завершена и подтверждена!")
+
+    # Уведомляем студента
+    if student_id:
+        try:
+            total_earned = db.get_student_total_earned(student_id)
+            text_stu = (
+                "🎉 <b>СМЕНА ПОДТВЕРЖДЕНА И ОПЛАЧЕНА!</b>\n\n"
+                f"Работодатель <b>{updated.get('employer_name', 'Заказчик')}</b> подтвердил завершение смены:\n"
+                f"📦 <b>{updated['title']}</b>\n"
+                f"💰 Начислено: <b>+{updated['pay_amount']:,} ₸</b> (Kaspi Gold)\n\n"
+                f"💼 Ваш общий заработок на платформе: <b>{total_earned:,} ₸</b>.\n"
+                "Вы снова свободны и можете брать новые смены!"
+            )
+            await bot.send_message(student_id, text_stu, parse_mode="HTML")
+        except Exception as e:
+            logger.warning(f"Failed to notify student: {e}")
+
+@dp.callback_query(F.data.startswith("abort_shift_"))
+async def abort_shift_callback(callback: types.CallbackQuery):
+    shift_id = int(callback.data.replace("abort_shift_", ""))
+    ok = db.cancel_shift(shift_id, callback.from_user.id)
+    if ok:
+        await callback.message.edit_text(
+            f"❌ <b>Заказ #{shift_id} отменен.</b>\nПубликация удалена из ленты студентов.",
+            parse_mode="HTML"
+        )
+        await callback.answer("Смена отменена")
+    else:
+        await callback.answer("Невозможно отменить (смена уже взята или закрыта).", show_alert=True)
+
 
 @dp.message(F.text == "🔄 Сменить роль")
 async def switch_role(message: types.Message):

@@ -57,3 +57,16 @@ def get_confirm_shift_keyboard(shift_id: int) -> InlineKeyboardMarkup:
         [InlineKeyboardButton(text="❌ Отменить", callback_data="cancel_shift")]
     ]
     return InlineKeyboardMarkup(inline_keyboard=kb)
+
+def get_employer_shift_actions_keyboard(shift_id: int, status: str):
+    if status == "matched":
+        kb = [
+            [InlineKeyboardButton(text="✅ Завершить смену и перевести Kaspi", callback_data=f"done_shift_{shift_id}")]
+        ]
+        return InlineKeyboardMarkup(inline_keyboard=kb)
+    elif status == "open":
+        kb = [
+            [InlineKeyboardButton(text="❌ Отменить публикацию", callback_data=f"abort_shift_{shift_id}")]
+        ]
+        return InlineKeyboardMarkup(inline_keyboard=kb)
+    return None

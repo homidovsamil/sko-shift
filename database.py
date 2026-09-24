@@ -237,3 +237,43 @@ def get_employer_shifts(employer_id: int) -> List[Dict[str, Any]]:
     conn.close()
     return [dict(r) for r in rows]
 
+def complete_shift(shift_id: int, employer_id: int) -> Optional[Dict[str, Any]]:
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT * FROM shifts WHERE id = ? AND employer_id = ?", (shift_id, employer_id))
+    row = cur.fetchone()
+    if not row or row["status"] != "matched":
+        conn.close()
+        return None
+
+    cur.execute("UPDATE shifts SET status = 'completed' WHERE id = ?", (shift_id,))
+
+    student_id = row["assigned_student_id"]
+    if student_id:
+        cur.execute("UPDATE users SET status = 'free' WHERE telegram_id = ?", (student_id,))
+        cur.execute("UPDATE applications SET status = 'completed' WHERE shift_id = ? AND student_id = ?", (shift_id, student_id))
+
+    conn.commit()
+    cur.execute("""
+    SELECT s.*, u.full_name as student_name, u.username as student_username
+    FROM shifts s
+    LEFT JOIN users u ON s.assigned_student_id = u.telegram_id
+    WHERE s.id = ?
+    """, (shift_id,))
+    updated_row = cur.fetchone()
+    conn.close()
+    return dict(updated_row) if updated_row else None
+
+def cancel_shift(shift_id: int, employer_id: int) -> bool:
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("SELECT status FROM shifts WHERE id = ? AND employer_id = ?", (shift_id, employer_id))
+    row = cur.fetchone()
+    if not row or row["status"] != "open":
+        conn.close()
+        return False
+    cur.execute("UPDATE shifts SET status = 'cancelled' WHERE id = ? AND employer_id = ?", (shift_id, employer_id))
+    conn.commit()
+    conn.close()
+    return True
+
