@@ -2,8 +2,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 
 def get_role_keyboard() -> ReplyKeyboardMarkup:
     kb = [
-        [KeyboardButton(text="🎓 Я Студент (Вуз / Колледж СКО)"), KeyboardButton(text="🏢 Я Работодатель")],
-        [KeyboardButton(text="⚡ Запустить Live Demo (Для жюри)")]
+        [KeyboardButton(text="🎓 Я Студент (Вуз / Колледж СКО)"), KeyboardButton(text="🏢 Я Работодатель")]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
 
@@ -33,14 +32,14 @@ def get_student_main_keyboard(is_free: bool = False) -> ReplyKeyboardMarkup:
     kb = [
         [KeyboardButton(text=status_btn)],
         [KeyboardButton(text="🔍 Найти смены рядом со мной"), KeyboardButton(text="💼 Мой баланс и профиль")],
-        [KeyboardButton(text="🏫 Сменить колледж / вуз"), KeyboardButton(text="⚡ Live Demo для питча")]
+        [KeyboardButton(text="🏫 Сменить колледж / вуз"), KeyboardButton(text="🔄 Сменить роль")]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)
 
 def get_employer_main_keyboard() -> ReplyKeyboardMarkup:
     kb = [
         [KeyboardButton(text="📝 Опубликовать экспресс-заказ")],
-        [KeyboardButton(text="📊 Мои активные заказы"), KeyboardButton(text="⚡ Live Demo для питча")],
+        [KeyboardButton(text="📊 Мои активные заказы")],
         [KeyboardButton(text="🔄 Сменить роль")]
     ]
     return ReplyKeyboardMarkup(keyboard=kb, resize_keyboard=True)

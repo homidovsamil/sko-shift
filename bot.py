@@ -169,18 +169,20 @@ async def student_profile(message: types.Message):
         user = db.get_user(message.from_user.id)
 
     shifts_count = user.get("completed_shifts", 0) if user else 0
-    earnings = shifts_count * 5000
+    earnings = db.get_student_total_earned(message.from_user.id)
     institution = (user.get("institution") if user and user.get("institution") else "СКУ им. М. Козыбаева")
     campus = (user.get("campus") if user and user.get("campus") else "ул. Интернациональная 26")
+
+    rating_str = f"{user.get('rating', 5.0):.1f} / 5.0" if shifts_count > 0 else "5.0 (Новый студент)"
 
     text = (
         f"👤 <b>Профиль студента:</b> {message.from_user.full_name}\n"
         f"🏫 Заведение: <b>{institution}</b>\n"
-        f"📍 Корпус: <b>{campus}</b>\n"
-        f"⭐ Рейтинг надежности: <b>5.0 / 5.0</b> (Проверен СтудСменой СКО)\n"
+        f"📍 Корпус / Кампус: <b>{campus}</b>\n"
+        f"⭐ Рейтинг надежности: <b>{rating_str}</b>\n"
         f"✅ Закрыто экспресс-смен: <b>{shifts_count}</b>\n"
-        f"💵 Заработано: <b>{earnings:,} ₸</b>\n\n"
-        f"💳 Выплаты приходят напрямую на ваш Kaspi Gold."
+        f"💵 Заработано за все время: <b>{earnings:,} ₸</b>\n\n"
+        f"💳 Выплаты приходят напрямую на Kaspi Gold."
     )
     await message.answer(text, parse_mode="HTML")
 
@@ -217,9 +219,14 @@ async def process_shift_text(message: types.Message, state: FSMContext):
     )
 
     free_students = db.get_free_students()
-    count_students = max(len(free_students), 4)
+    count_students = len(free_students)
 
     loc_info = ai_parser.get_location_info(parsed["location_name"] + " " + parsed.get("address", ""))
+
+    if count_students > 0:
+        students_status_str = f"👥 <b>Свободных студентов онлайн:</b> {count_students} чел."
+    else:
+        students_status_str = "👥 <b>Свободных студентов онлайн сейчас:</b> 0 чел. (заказ будет сразу виден в поиске «🔍 Найти смены»)"
 
     preview_text = (
         "⚡ <b>ИИ успешно распознал ваш заказ:</b>\n"
@@ -229,8 +236,8 @@ async def process_shift_text(message: types.Message, state: FSMContext):
         f"📍 <b>Локация:</b> {parsed['location_name']} ({parsed['address']})\n"
         f"⏰ <b>Длительность:</b> {parsed['duration_hours']} часа ({parsed['time_window']})\n"
         f"💰 <b>Оплата:</b> {parsed['pay_amount']:,} ₸ (Kaspi)\n\n"
-        f"👥 <b>Свободных студентов колледжей и вузов рядом:</b> {count_students} чел.\n\n"
-        "Разослать мгновенное предложение студентам?"
+        f"{students_status_str}\n\n"
+        "Опубликовать смену для студентов?"
     )
 
     await wait_msg.delete()
@@ -304,12 +311,15 @@ async def take_shift_callback(callback: types.CallbackQuery):
 
     await callback.message.edit_text(receipt_text, parse_mode="HTML")
 
-    if shift and shift["employer_id"] != 999999 and shift["employer_id"] != student.id:
+    if shift and shift["employer_id"] != student.id:
         try:
+            student_contact = f"@{student.username}" if student.username else f"ID: {student.id}"
             alert_emp = (
-                "🎉 <b>Исполнитель найден за 38 секунд!</b>\n\n"
+                "🎉 <b>Исполнитель найден!</b>\n\n"
                 f"Студент <b>{student.full_name}</b> ({inst_name}) принял вашу смену.\n"
-                f"Смена: <b>{shift['title']}</b> ({shift['pay_amount']:,} ₸)"
+                f"📦 Смена: <b>{shift['title']}</b> ({shift['pay_amount']:,} ₸)\n"
+                f"📱 Контакт: {student_contact}\n\n"
+                "Свяжитесь со студентом для уточнения деталей."
             )
             await bot.send_message(shift["employer_id"], alert_emp, parse_mode="HTML")
         except Exception as e:
@@ -317,57 +327,41 @@ async def take_shift_callback(callback: types.CallbackQuery):
 
     await callback.answer("Смена принята!")
 
-# ==================== LIVE DEMO ДЛЯ ПИТЧА (ДЛЯ ЖЮРИ) ====================
+# ==================== ЗАКАЗЫ РАБОТОДАТЕЛЯ ====================
 
-@dp.message(F.text.contains("Live Demo") | (F.text == "/demo"))
-async def trigger_live_demo(message: types.Message):
-    """Специальный режим для живого выступления перед жюри AI Battle"""
-    demo_header = (
-        "🎬 <b>РЕЖИМ LIVE DEMO ДЛЯ ЖЮРИ AI BATTLE</b>\n"
-        "──────────────────────────────\n"
-        "Демонстрация сквозного сценария для всех колледжей и вузов СКО:\n"
-        "1. Запрос работодателя из Dostyk Mall в 1 строку.\n"
-        "2. Google Gemini AI извлекает параметры.\n"
-        "3. Студент колледжа СКО мгновенно получает предложение и цифровую расписку."
-    )
-    await message.answer(demo_header, parse_mode="HTML")
-    await asyncio.sleep(1.0)
+@dp.message(F.text == "📊 Мои активные заказы")
+async def employer_active_orders(message: types.Message):
+    shifts = db.get_employer_shifts(message.from_user.id)
+    if not shifts:
+        await message.answer(
+            "📊 <b>У вас пока нет созданных заказов.</b>\n\n"
+            "Нажмите <b>«📝 Опубликовать экспресс-заказ»</b>, чтобы разместить новую смену для студентов.",
+            parse_mode="HTML"
+        )
+        return
 
-    raw_sample = "Нужен помощник на разгрузку обуви в Dostyk Mall на 3 часа, оплата 5 000 ₸ сразу на Kaspi"
-    await message.answer(f"📱 <b>[Шаг 1] Ввод работодателя в Telegram:</b>\n<i>«{raw_sample}»</i>", parse_mode="HTML")
-    
-    wait_msg = await message.answer("🤖 <i>Google Gemini AI обрабатывает сообщение...</i>", parse_mode="HTML")
-    await asyncio.sleep(1.2)
-    
-    parsed = ai_parser.parse_shift_request(raw_sample)
-    await wait_msg.delete()
+    text = "📊 <b>Ваши заказы и смены:</b>\n\n"
+    for s in shifts:
+        if s["status"] == "open":
+            status_text = "🟢 Открыта (поиск исполнителя)"
+        elif s["status"] == "matched":
+            status_text = "🤝 Исполнитель найден"
+        else:
+            status_text = "✅ Завершена"
 
-    shift_id = db.create_shift(
-        employer_id=message.from_user.id,
-        employer_name="Бутик брендовой одежды (Dostyk Mall)",
-        raw_text=raw_sample,
-        parsed=parsed
-    )
+        text += (
+            f"📦 <b>{s['title']}</b>\n"
+            f"• Статус: <b>{status_text}</b>\n"
+            f"• Локация: {s['location_name']}\n"
+            f"• Оплата: {s['pay_amount']:,} ₸ ({s['time_window']})\n"
+        )
+        if s.get("student_name"):
+            text += f"• Исполнитель: <b>{s['student_name']}</b> ({s.get('student_institution', 'СКО')})\n"
+            if s.get("student_username"):
+                text += f"• Связь: @{s['student_username']}\n"
+        text += "────────────────────\n"
 
-    loc_info = ai_parser.get_location_info("Dostyk Mall", "Высший колледж им. М. Жумабаева", "ул. Абая 28")
-
-    step2_text = (
-        "⚡ <b>[Шаг 2] Распознано ИИ (JSON Output):</b>\n"
-        f"• Задача: <b>{parsed['title']}</b>\n"
-        f"• Место: <b>{parsed['location_name']}</b> ({parsed['address']})\n"
-        f"• Расчет пути от колледжа им. Жумабаева: <b>10 минут пешком (900 м)</b>\n"
-        f"• Оплата: <b>{parsed['pay_amount']:,} ₸</b> (Kaspi)\n"
-        f"• Статус: <b>Студенты колледжей онлайн</b>"
-    )
-    await message.answer(step2_text, parse_mode="HTML")
-    await asyncio.sleep(1.0)
-
-    step3_text = (
-        "📲 <b>[Шаг 3] Экран смартфона студента колледжа СКО:</b>\n"
-        "Вам пришло персональное предложение в 10 минутах от пар!\n"
-        "Нажмите кнопку ниже, чтобы забрать смену 👇"
-    )
-    await message.answer(step3_text, parse_mode="HTML", reply_markup=kb.get_shift_inline_keyboard(shift_id))
+    await message.answer(text, parse_mode="HTML")
 
 @dp.message(F.text == "🔄 Сменить роль")
 async def switch_role(message: types.Message):

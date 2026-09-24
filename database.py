@@ -209,3 +209,31 @@ def assign_shift_to_student(shift_id: int, student_id: int) -> bool:
     conn.commit()
     conn.close()
     return True
+
+def get_student_total_earned(student_id: int) -> int:
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+    SELECT COALESCE(SUM(pay_amount), 0) as total 
+    FROM shifts 
+    WHERE assigned_student_id = ? AND status IN ('matched', 'completed')
+    """, (student_id,))
+    row = cur.fetchone()
+    conn.close()
+    return int(row["total"]) if row else 0
+
+def get_employer_shifts(employer_id: int) -> List[Dict[str, Any]]:
+    conn = get_connection()
+    cur = conn.cursor()
+    cur.execute("""
+    SELECT s.*, u.full_name as student_name, u.username as student_username, u.institution as student_institution
+    FROM shifts s
+    LEFT JOIN users u ON s.assigned_student_id = u.telegram_id
+    WHERE s.employer_id = ?
+    ORDER BY s.id DESC
+    LIMIT 10
+    """, (employer_id,))
+    rows = cur.fetchall()
+    conn.close()
+    return [dict(r) for r in rows]
+
